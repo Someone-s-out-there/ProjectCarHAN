@@ -8,9 +8,6 @@
     4. afstand tot de voorganger 
 
     5. wat voor een remote controll
-        5.1 bedraadt/niet
-        5.2 soort remote (telefoon/laptop/overig)
-        5.3 soort protocol
 
     6  wat voor een display
         6.1 eenheid voor snelheid (indien geen antwoord m/s)
