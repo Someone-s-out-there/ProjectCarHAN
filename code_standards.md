@@ -39,7 +39,7 @@ deze geeft ook aan door wie het gemaakt is, waneer het gemaakt is. dit geldt iet
 
 
 #### Headers
-de included headers moeten op een 
+de included headers gesplit in 2 secties. een sectie met compiler provided includes 
 
 #### Macros
 
