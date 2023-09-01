@@ -12,6 +12,7 @@
     6  wat voor een display
         6.1 eenheid voor snelheid (indien geen antwoord m/s)
         6.2 tijds formaat 
+        6.3 moet de display op de auto of mag telefoon.
     7. een menu op wat? (scherm met knoppen, telefoon (bt/wifi)
 
     8. reflector achter
