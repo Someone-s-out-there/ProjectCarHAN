@@ -39,7 +39,8 @@ deze geeft ook aan door wie het gemaakt is, waneer het gemaakt is. dit geldt iet
 
 
 #### Headers
-de included headers gesplit in 2 secties. een sectie met compiler provided includes 
+de included headers gesplit in 2 secties. een sectie met compiler provided includes (#include <...>)
+en een sectie voor "user" includes. hiermee wordt bedoeld door ons geschreven libraries sensoren en actoren.
 
 #### Macros
 
