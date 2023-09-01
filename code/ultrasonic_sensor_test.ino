@@ -3,7 +3,7 @@
 
 long duration;
 int distance;
-int refreshRateUS;
+int refreshRateUS= 100;
 
 void setup() {
   Serial.begin(9600);
