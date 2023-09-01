@@ -6,6 +6,7 @@
     2. wat is de kleur van de lijn 
     3. breedte van de lijn 
     4. afstand tot de voorganger 
+    4.1 stopafstand
 
     5. wat voor een remote controll
 
