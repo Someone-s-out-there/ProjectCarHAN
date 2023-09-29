@@ -81,7 +81,7 @@ void serialEvent()
       break;
     case 'v': // to set the speed send: "v0" to "v255"
       setSpeed(serialReceived.substring(1).toInt());
-      Serial.println();
+      Serial.println("setspeed");
       break;
     default:
       Serial.println("niks");
