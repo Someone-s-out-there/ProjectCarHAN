@@ -5,6 +5,7 @@
 #include "motor_controls.h"
 
 #include "Arduino.h"
+#include <cstdint>
 
 char en1;
 char in1;
@@ -14,7 +15,7 @@ char en2;
 char in3;
 char in4;
 
-int motorSpeed = 70;
+uint8_t motorSpeed = 70;
 
 void motorSetup(byte EN1, byte IN1, byte IN2, byte EN2, byte IN3, byte IN4) {
     en1 = EN1;
@@ -35,7 +36,7 @@ void motorSetup(byte EN1, byte IN1, byte IN2, byte EN2, byte IN3, byte IN4) {
     pinMode(in4, OUTPUT);
 }
 
-void setSpeed(int snelheid) { motorSpeed = snelheid; }
+void setSpeed(uint8_t snelheid) { motorSpeed = snelheid; }
 
 void forward() {
     analogWrite(en1, motorSpeed);  // PWM

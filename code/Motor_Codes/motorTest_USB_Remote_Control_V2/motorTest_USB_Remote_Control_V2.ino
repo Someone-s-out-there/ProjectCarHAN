@@ -37,7 +37,7 @@ void setup()
   digitalWrite(13, LOW);
   delay(100);
   digitalWrite(13, HIGH);
-  Serial.println("Lets GOo");
+  Serial.println("Lets GO");
 }
 
 void loop()
@@ -80,7 +80,7 @@ void serialEvent()
       stop();
       break;
     case 'v': // to set the speed send: "v0" to "v255"
-      setSpeed((serialReceived.substring(1)));
+      setSpeed(serialReceived.substring(1).toInt());
       Serial.println();
       break;
     default:
