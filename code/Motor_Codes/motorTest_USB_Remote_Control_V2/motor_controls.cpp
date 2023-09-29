@@ -5,15 +5,15 @@
 #include "Arduino.h"
 #include "motor_controls.h"
 
-char EN_Motor_A;
-char IN1_Motor_A;
+uint8_t EN_Motor_A;
+uint8_t IN1_Motor_A;
 
-char EN_Motor_B;
-char IN3_Motor_B;
+uint8_t EN_Motor_B;
+uint8_t IN3_Motor_B;
 
-int motorSpeed = 70;
+uint8_t motorSpeed = 70;
 
-void motorSetup(byte EN1, byte IN1, byte IN3, byte EN2)
+void motorSetup(uint8_t EN1, uint8_t IN1, uint8_t IN3, uint8_t EN2)
 {
   EN_Motor_A = EN1;
 
