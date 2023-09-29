@@ -32,7 +32,7 @@ void motorSetup(uint8_t EN1, uint8_t IN1, uint8_t IN3, uint8_t EN2)
   pinMode(IN3_Motor_B, OUTPUT);
 }
 
-void setSpeed(int snelheid)
+void setSpeed(uint8_t snelheid)
 {
   motorSpeed = snelheid;
 }
@@ -44,6 +44,15 @@ void forward()
 
   analogWrite(EN_Motor_B, motorSpeed); // PWM
   digitalWrite(IN3_Motor_B, HIGH);
+}
+
+void backward()
+{
+  analogWrite(EN_Motor_A, motorSpeed); // pwm
+  digitalWrite(IN1_Motor_A, LOW);
+
+  analogWrite(EN_Motor_B,motorSpeed); // pwm
+  digitalWrite(IN3_Motor_B, LOW);
 }
 
 void left()
@@ -73,11 +82,3 @@ void stop()
   digitalWrite(IN3_Motor_B, LOW);
 }
 
-void backward()
-{
-  analogWrite(EN_Motor_A, motorSpeed); // pwm
-  digitalWrite(IN1_Motor_A, LOW);
-
-  analogWrite(EN_Motor_B,motorSpeed); // pwm
-  digitalWrite(IN3_Motor_B, LOW);
-}
