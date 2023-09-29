@@ -48,6 +48,16 @@ void forward() {
     // digitalWrite(in4, LOW);
 }
 
+void backward() {
+    analogWrite(en1, motorSpeed);  // pwm
+    digitalWrite(in1, LOW);
+    // digitalWrite(in2, HIGH);
+
+    analogWrite(en2, motorSpeed);  // pwm
+    digitalWrite(in3, LOW);
+    // digitalWrite(in4, HIGH);
+}
+
 void left() {
     analogWrite(en1, motorSpeed);  // PWM
     digitalWrite(in1, LOW);
@@ -78,12 +88,3 @@ void stop() {
     // digitalWrite(in4, LOW);
 }
 
-void backward() {
-    analogWrite(en1, motorSpeed);  // pwm
-    digitalWrite(in1, LOW);
-    // digitalWrite(in2, HIGH);
-
-    analogWrite(en2, motorSpeed);  // pwm
-    digitalWrite(in3, LOW);
-    // digitalWrite(in4, HIGH);
-}

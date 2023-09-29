@@ -10,9 +10,12 @@
 void motorSetup(byte EN1, byte IN1 ,byte IN2, byte EN2, byte EN3, byte EN4);
 
 void setSpeed(uint8_t snelheid);
+
 void forward();
-void stop();
 void backward();
+
 void left();
 void right();
+
+void stop();
 #endif
