@@ -7,7 +7,7 @@
 
 class MOTORCONTROL {
 public:
-  void MOTOR(uint8_t EN1, uint8_t IN1, uint8_t IN3, uint8_t EN2) {
+  void MOTORCONTROL(uint8_t EN1, uint8_t IN1, uint8_t IN3, uint8_t EN2) {
     EN_Motor_A = EN1;
 
     IN1_Motor_A = IN1;
@@ -79,8 +79,9 @@ private:
 }
 
 
-  MOTORCONTROL motor(EN1, IN1, IN3, EN2);
-setup() {
+MOTORCONTROL motor(EN1, IN1, IN3, EN2);
+
+void setup() {
   motor.init();
 }
 
