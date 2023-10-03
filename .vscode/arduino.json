@@ -1,0 +1,5 @@
+{
+    "board": "atmel-avr-xminis:avr:atmega328p_xplained_mini",
+    "programmer": "medbg",
+    "sketch": "code/Motor_Codes/Test_Motor_controls_v2/Test_Motor_controls_v2.ino"
+}
