@@ -1,3 +1,4 @@
+#include <stdint.h>
 // van motordiver LN298N
 #define IN1 8   //11
 #define IN3 11  //3
@@ -7,13 +8,13 @@
 
 class MOTORCONTROL {
 public:
-  void MOTORCONTROL(uint8_t EN1, uint8_t IN1, uint8_t IN3, uint8_t EN2) {
-    EN_Motor_A = EN1;
+  MOTORCONTROL(uint8_t enable1, uint8_t pwm2, uint8_t pwm3, uint8_t enable2) {
+    EN_Motor_A = enable1;
 
-    IN1_Motor_A = IN1;
-    IN3_Motor_B = IN3;
+    IN1_Motor_A = pwm2;
+    IN3_Motor_B = pwm3;
 
-    EN_Motor_B = EN2;
+    EN_Motor_B = enable2;
 
     // motor links
     pinMode(EN_Motor_A, OUTPUT);
