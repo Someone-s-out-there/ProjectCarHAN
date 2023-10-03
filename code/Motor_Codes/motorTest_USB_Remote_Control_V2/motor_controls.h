@@ -4,15 +4,17 @@
 */ 
 #ifndef MOTOR_CONTROLS_H
 #define MOTOR_CONTROLS_H
-#include <arduino.h>
 
 
-void motorSetup(byte EN1, byte IN1, byte IN3, byte EN2);
 
-void setSpeed(int snelheid);
+void motorSetup(uint8_t EN1, uint8_t IN1, uint8_t IN3, uint8_t EN2);
+
+void setSpeed(uint8_t snelheid);
 void forward();
-void stop();
 void backward();
+
 void left();
 void right();
+
+void stop();
 #endif
