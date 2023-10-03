@@ -1,9 +1,19 @@
+/*
+  By Julian Janssen & Sjoerd van de Wege
+  03-10-2023
+
+  Concept motorcontol with class MOTORCONTROL 
+
+  Tested on de L298N motordriver  
+  Use Serial monitor on 9600 baud
+*/
 #ifndef MOTOR_CONTROLS_H
 #define MOTOR_CONTROLS_H
 
-class MOTORCONTROL {
-public:
-  MOTORCONTROL(uint8_t enable1, uint8_t pwm2, uint8_t pwm3, uint8_t enable2) {
+class MOTORCONTROL 
+{
+  public:
+    MOTORCONTROL(uint8_t enable1, uint8_t pwm2, uint8_t pwm3, uint8_t enable2) {
     EN_Motor_A = enable1;
 
     IN1_Motor_A = pwm2;
@@ -19,6 +29,7 @@ public:
     pinMode(EN_Motor_B, OUTPUT);
     pinMode(IN3_Motor_B, OUTPUT);
   }
+
   void setSpeed(int snelheid) {
     motorSpeed = snelheid;
   }
@@ -66,5 +77,5 @@ public:
 private:
   uint8_t EN_Motor_A, IN1_Motor_A, EN_Motor_B, IN3_Motor_B;
   uint8_t motorSpeed = 70;
-}
+};
 #endif
