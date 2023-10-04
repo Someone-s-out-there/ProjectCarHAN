@@ -2,9 +2,9 @@
   By Julian Janssen
   03-10-2023
 
-  Concept motorcontol with class MOTORCONTROL 
+  Concept motorcontol with class MOTORCONTROL
 
-  Tested on de L298N motordriver  
+  Tested on de L298N motordriver
   Use Serial monitor on 9600 baud
 */
 #include "motor_controls.h"
@@ -18,11 +18,15 @@
 #define EN1 9
 #define EN2 10
 
-enum motorcommands { MOTOR_FORWARD = 'w',
-                     MOTOR_LEFT = 'a',
-                     MOTOR_RIGHT = 'd',
-                     MOTOR_BACK = 'b',
-                     MOTOR_STOP = 's' };
+enum motorcommands
+{
+  MOTOR_FORWARD = 'w',
+  MOTOR_LEFT = 'a',
+  MOTOR_RIGHT = 'd',
+  MOTOR_BACK = 'b',
+  MOTOR_STOP = 's',
+  MOTOR_ESTOP = 'e'
+};
 
 String serialReceived;
 
@@ -47,48 +51,52 @@ void setup() {
   Serial.println("Lets Goo");
 }
 
-void loop() {
-  //leeg...
-}
+void loop() {}
 
 void serialEvent() {
-  while (Serial.available()) {
+  while (Serial.available())
+  {
 
     serialReceived = Serial.readStringUntil('\n');
     inputString = serialReceived.charAt(0);
 
     stringComplete = true;
 
-    switch (inputString) {
-      case MOTOR_FORWARD:
-        Serial.println("Naar voren");
-        motor.forward();
-        break;
+    switch (inputString)
+    {
+    case MOTOR_FORWARD:
+      Serial.println("Naar voren");
+      motor.forward();
+      break;
 
-      case MOTOR_BACK:
-        motor.backward();
-        Serial.println("Naar achteren");
-        break;
+    case MOTOR_BACK:
+      motor.backward();
+      Serial.println("Naar achteren");
+      break;
 
-      case MOTOR_LEFT:
-        Serial.println("Naar links");
-        motor.left();
-        break;
+    case MOTOR_LEFT:
+      Serial.println("Naar links");
+      motor.left();
+      break;
 
-      case MOTOR_RIGHT:
-        Serial.println("Naar rechts");
-        motor.right();
-        break;
+    case MOTOR_RIGHT:
+      Serial.println("Naar rechts");
+      motor.right();
+      break;
 
-      case MOTOR_STOP:
-        Serial.println("Stop");
-        motor.stop();
-        break;
+    case MOTOR_STOP:
+      Serial.println("Stop");
+      motor.stop();
+      break;
 
-      default:
-        Serial.println("niks");
-        motor.stop();
-        break;
+    case MOTOR_ESTOP:
+      Serial.println("E-stop");
+      motor.estop();
+
+    default:
+      Serial.println("niks");
+      motor.stop();
+      break;
     }
   }
 }
