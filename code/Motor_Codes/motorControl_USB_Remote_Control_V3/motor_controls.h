@@ -9,6 +9,8 @@
 */
 #ifndef MOTOR_CONTROLS_H
 #define MOTOR_CONTROLS_H
+#include <stdint.h>
+#include <Arduino.h>
 
 class MOTORCONTROL 
 {
@@ -30,8 +32,8 @@ class MOTORCONTROL
     pinMode(IN3_Motor_B, OUTPUT);
   }
 
-  void setSpeed(int snelheid) {
-    motorSpeed = snelheid;
+  void setSpeed(int Speed) {
+    motorSpeed = Speed;
   }
 
   void forward() {
@@ -59,6 +61,25 @@ class MOTORCONTROL
   }
 
   void stop() {
+    uint8_t hold = motorSpeed;
+    static const uint8_t decr=25;
+    while (hold >decr)
+    {
+      hold -= decr;
+      analogWrite(EN_Motor_A,hold);
+      analogWrite(EN_Motor_B,hold);
+      delay(25);   
+    }
+    hold = 0;
+    analogWrite(EN_Motor_A,hold);
+    analogWrite(EN_Motor_B,hold);
+    
+    // motorSpeed -= 25;
+    // analogWrite(EN_Motor_A, 0);  // pwm
+    // analogWrite(EN_Motor_B, 0);  // pwm
+    }
+
+  void estop() {
     analogWrite(EN_Motor_A, 0);  // pwm
     digitalWrite(IN1_Motor_A, LOW);
 
