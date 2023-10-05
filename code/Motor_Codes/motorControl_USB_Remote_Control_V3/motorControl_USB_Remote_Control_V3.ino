@@ -35,7 +35,8 @@ boolean stringComplete, changeDir;
 
 MOTORCONTROL motor(EN1, IN1, IN3, EN2);
 
-void setup() {
+void setup()
+{
   // Begin Serial monitor
   Serial.begin(9600);
 
@@ -51,9 +52,10 @@ void setup() {
   Serial.println("Lets Goo");
 }
 
-void loop() {}
+void loop(){}
 
-void serialEvent() {
+void serialEvent()
+{
   while (Serial.available())
   {
 
