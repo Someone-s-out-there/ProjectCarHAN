@@ -9,19 +9,16 @@ int i = 0;
 int readings[4];
 int average;
 
-void calculateAverage(int distance)
-{
-  readings[i] = distance;
-  i++;
+constexpr uint8_t FILTER_SHIFT = 4U; // Parameter K
+uint16_t
+simpleRecursiveFilter(uint16_t filterInput) {
+        static uint16_t filterReg; // Delay element - 32 bits
 
-  if (i = 3)
-  {
-    average = (readings[0] + readings[1] + readings[2] + readings[3]) / 4;
-    i = 0;
+        filterReg = filterReg - (filterReg >> FILTER_SHIFT) + filterInput;
+        // Scale output for unity gain.
+        return (filterReg >> FILTER_SHIFT);
+    }
 
-    Serial.println(average);
-  }
-}
 
 void setup() {
   Serial.begin(9600);
@@ -47,7 +44,10 @@ void loop() {
   // Omrekenen van tijd naar afstand
   distance = duration / 29 / 2;
 
-  calculateAverage(distance);
+  
+    uint16_t tmp = simpleRecursiveFilter(distance);
+    Serial.println(tmp);
+
 
   // Print afstand in serial monitor
   // Serial.print("Distance: ");
