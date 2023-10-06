@@ -1,15 +1,13 @@
 /*
-  By Julian Janssen
-  03-10-2023
+  By Julian Janssen & Sjoerd van de Wege
+  05-10-2023
 
-  Concept motorcontol with class MOTORCONTROL
+  Concept motorcontol with class MOTORCONTROL 
 
-  Tested on de L298N motordriver
+  Tested on de L298N motordriver  
   Use Serial monitor on 9600 baud
 */
 #include "motor_controls.h"
-
-#define buildinLed 13
 
 // Pins van motordriver LN298N
 #define IN1 8
@@ -17,6 +15,9 @@
 
 #define EN1 9
 #define EN2 10
+
+#define LEFT_LED 12
+#define RIGHT_LED 13
 
 enum motorcommands
 {
@@ -33,29 +34,20 @@ String serialReceived;
 char inputString;
 boolean stringComplete, changeDir;
 
-MOTORCONTROL motor(EN1, IN1, IN3, EN2);
+MOTORCONTROL motor(EN1, IN1, IN3, EN2, LEFT_LED, RIGHT_LED);
 
-void setup()
-{
+void setup() {
   // Begin Serial monitor
   Serial.begin(9600);
 
   motor.setSpeed(150);
 
-  pinMode(buildinLed, OUTPUT);
-
-  digitalWrite(buildinLed, HIGH);
-  delay(100);
-  digitalWrite(buildinLed, LOW);
-  delay(100);
-  digitalWrite(buildinLed, HIGH);
   Serial.println("Lets Goo");
 }
 
-void loop(){}
+void loop() {}
 
-void serialEvent()
-{
+void serialEvent() {
   while (Serial.available())
   {
 
