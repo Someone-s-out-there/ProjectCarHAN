@@ -1,7 +1,7 @@
-#define sensor1 8   // Sensor 1 op pin D8
-#define sensor2 9   // Sensor 2 op pin D9
-#define sensor3 10  // Sensor 3 op pin D10
-#define sensor4 11  // Sensor 4 op pin D11
+#define sensor1 2   // Sensor 1 op pin D8
+#define sensor2 3   // Sensor 2 op pin D9
+#define sensor3 4  // Sensor 3 op pin D10
+#define sensor4 5  // Sensor 4 op pin D11
 
 int sensorState1 = 0;
 int sensorState2 = 0;
@@ -12,7 +12,7 @@ long refreshRateIR = 100;
 
 class IR{
     public:
-    IR(ir1,ir2,ir3,ir4): _ir1(ir1),_ir2(ir2),_ir3(ir3),_ir4(ir4){}
+    IR(char ir1,char ir2,char ir3,char ir4): _ir1(ir1),_ir2(ir2),_ir3(ir3),_ir4(ir4){}
     ~IR()=default;
     void init(){
         pinMode(_ir1,INPUT);
@@ -26,7 +26,7 @@ class IR{
 
     private:
     int _ir1,_ir2,_ir3,_ir4;
-}
+};
 
 
 
