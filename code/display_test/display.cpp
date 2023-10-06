@@ -4,6 +4,15 @@
 
 extern LiquidCrystal_I2C lcd;
 
+enum motorDirection
+{
+  STILL = 's',
+  FORWARD = 'f',
+  BACKWARD = 'b',
+  LEFT = 'l',
+  RIGHT = 'r'
+};
+
 struct chars
 {
   byte batteryRightHigh[8] = 
@@ -162,13 +171,49 @@ void displayBattery(uint8_t batteryPercentage)
   }
 }
 
-//displayTimeUsed(uint8_t timeUsed)
-// {
-//   lcd.setCursor(0, 1);
-//   lcd.print(timeUsed + "m");
-// }
+void displayTimeUsed(uint8_t timeUsed)
+{
+  lcd.setCursor(0, 1);
+  lcd.print(timeUsed);
+}
 
 // displaySpeed(int measuredSpeed)
 // {
   
 // }
+
+void displayDirection(char direction)
+{
+  switch(direction)
+  {
+    case 's':
+      lcd.setCursor(8, 0);
+      lcd.print("   STILL");
+      break;
+
+    case 'f':
+      lcd.setCursor(8, 0);
+      lcd.print(" FORWARD");
+      break;
+
+    case 'b':
+      lcd.setCursor(8, 0);
+      lcd.print("BACKWARD");
+      break;
+
+    case 'l':
+      lcd.setCursor(8, 0);
+      lcd.print("    LEFT");
+      break;
+
+    case 'r':
+      lcd.setCursor(8, 0);
+      lcd.print("   RIGHT");
+      break;
+
+    default:
+      lcd.setCursor(8, 0);
+      lcd.print("   ERROR");
+      break;
+  }
+}
