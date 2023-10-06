@@ -171,10 +171,10 @@ void displayBattery(uint8_t batteryPercentage)
   }
 }
 
-void displayTimeUsed(uint8_t timeUsed)
+void displayTimeUsed(unsigned long hours, unsigned long minutes)
 {
   lcd.setCursor(0, 1);
-  lcd.print(timeUsed);
+  lcd.print(String(hours) + String("h ") + String(minutes) + String("m"));
 }
 
 // displaySpeed(int measuredSpeed)
