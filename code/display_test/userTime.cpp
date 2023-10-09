@@ -1,3 +1,8 @@
+/*  The ATmega 328p EEPROM has 1024 bytes and has a life of 100.000 writings.
+    This program can count the time up to 7253 hours.
+*/
+
+
 #include "userTime.h"
 #include <EEPROM.h>
 #include <Arduino.h>
@@ -7,8 +12,8 @@ uint16_t EEPROMByteNumber;
 uint8_t EEPROMByteValue;
 uint32_t EEPROMValue;
 
-uint32_t previousMillis = 0;
-uint16_t interval = 10000;
+uint32_t previousMillisTime = 0;
+uint16_t intervalTime = 10000;
 
 bool displayTimeOnStartup = true;
 
@@ -49,10 +54,10 @@ void updateUserTime()
   uint32_t currentMillis = millis();
 
   // Happens after every <interval> milliseconds
-  if (currentMillis - previousMillis >= interval)
+  if (currentMillis - previousMillisTime >= intervalTime)
   {
     // Resets timer to 0
-    previousMillis = currentMillis;
+    previousMillisTime = currentMillis;
     
     // Total EEPROM value is increased by one
     EEPROMValue++;

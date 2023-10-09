@@ -174,6 +174,11 @@ void displayBattery(uint8_t batteryPercentage)
 void displayTimeUsed(uint32_t hours, uint32_t minutes)
 {
   lcd.setCursor(0, 1);
+  
+  // Clears the time space before displaying the time
+  lcd.print("         ");
+  
+  lcd.setCursor(0, 1);
   lcd.print(String(hours) + String("h ") + String(minutes) + String("m"));
 }
 

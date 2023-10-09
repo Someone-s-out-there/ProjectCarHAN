@@ -1,10 +1,13 @@
 #include <LiquidCrystal_I2C.h> 
 #include "display.h"
+#include "userTime.h"
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 uint8_t batteryPercentage = 0;
-uint8_t timeUsed = 10;
+
+uint32_t previousMillis = 0;
+uint16_t interval = 500;
 
 enum motorDirection
 {
@@ -21,17 +24,26 @@ void setup() {
   lcd.backlight();
   lcd.clear();
 
-  displayTimeUsed(timeUsed);
   displayDirection(STILL);
+
+  getUserTime();
 }
 
 void loop() {
-  displayBattery(batteryPercentage);
-  batteryPercentage += 10;
-  delay(500);
+  uint32_t currentMillis = millis();
 
-  if (batteryPercentage > 100)
+  if (currentMillis - previousMillis >= interval)
   {
-    batteryPercentage = 0;
+    previousMillis = currentMillis;
+
+    displayBattery(batteryPercentage);
+    batteryPercentage += 10;
+
+    if (batteryPercentage > 100)
+    {
+      batteryPercentage = 0;
+    }
   }
+
+  updateUserTime();
 }
