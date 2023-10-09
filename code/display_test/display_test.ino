@@ -1,13 +1,9 @@
 #include <LiquidCrystal_I2C.h> 
 #include "display.h"
 #include "userTime.h"
+#include "Mode_Select.h"
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
-
-uint8_t batteryPercentage = 0;
-
-uint32_t previousMillis = 0;
-uint16_t interval = 500;
 
 enum motorDirection
 {
@@ -19,6 +15,9 @@ enum motorDirection
 };
 
 void setup() {
+  Serial.begin(9600);
+  switchSetup();
+
   lcd.init();
   displaySetup();
   lcd.backlight();
@@ -30,20 +29,9 @@ void setup() {
 }
 
 void loop() {
-  uint32_t currentMillis = millis();
-
-  if (currentMillis - previousMillis >= interval)
-  {
-    previousMillis = currentMillis;
-
-    displayBattery(batteryPercentage);
-    batteryPercentage += 10;
-
-    if (batteryPercentage > 100)
-    {
-      batteryPercentage = 0;
-    }
-  }
-
   updateUserTime();
+
+  batteryCycle();
+
+  readSwitches();
 }

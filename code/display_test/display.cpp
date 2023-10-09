@@ -81,6 +81,31 @@ struct chars
     B10000, 
     B11111
   };
+
+  byte play[8] = 
+  {
+    B00000, 
+    B11000, 
+    B11100, 
+    B11110, 
+    B11110, 
+    B11100, 
+    B11000, 
+    B00000
+  };
+
+  byte pause[8] = 
+  {
+    B00000, 
+    B11011, 
+    B11011, 
+    B11011, 
+    B11011, 
+    B11011, 
+    B11011, 
+    B00000
+  };
+
 }chars;
 
 void displaySetup()
@@ -91,6 +116,30 @@ void displaySetup()
   lcd.createChar(3, chars.batteryMiddleHigh);
   lcd.createChar(4, chars.batteryRightLow);
   lcd.createChar(5, chars.batteryRightHigh);
+  lcd.createChar(6, chars.play);
+  lcd.createChar(7, chars.pause);
+}
+
+uint32_t previousMillis = 0;
+uint16_t interval = 500;
+uint8_t batteryPercentage = 0;
+
+void batteryCycle()
+{
+  uint32_t currentMillis = millis();
+
+  if (currentMillis - previousMillis >= interval)
+  {
+    previousMillis = currentMillis;
+
+    displayBattery(batteryPercentage);
+    batteryPercentage += 10;
+
+    if (batteryPercentage > 100)
+    {
+      batteryPercentage = 0;
+    }
+  }
 }
 
 void displayBattery(uint8_t batteryPercentage)
@@ -168,6 +217,38 @@ void displayBattery(uint8_t batteryPercentage)
 
     lcd.setCursor(15, 1);
     lcd.write(byte(4));
+  }
+}
+
+void displayMode(char mode)
+{
+  switch (mode)
+  {
+    case 'm':
+      lcd.setCursor(0, 0);
+      lcd.write(byte(6));
+      lcd.print("Manual");
+      break;
+    case 's':
+      lcd.setCursor(0, 0);
+      lcd.write(byte(6));
+      lcd.print("Slave ");
+      break;
+    case 'a':
+      lcd.setCursor(0, 0);
+      lcd.write(byte(6));
+      lcd.print("Auto  ");
+      break;
+    case '-':
+      lcd.setCursor(0, 0);
+      lcd.write(byte(7));
+      lcd.print("      ");
+      break;
+    default:
+      lcd.setCursor(0, 0);
+      lcd.write(byte(6));
+      lcd.print("Error ");
+      break;
   }
 }
 
