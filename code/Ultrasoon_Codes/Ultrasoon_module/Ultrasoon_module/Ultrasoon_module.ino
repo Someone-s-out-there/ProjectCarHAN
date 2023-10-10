@@ -9,10 +9,10 @@
 */
 #include "ultrasoon.h"
 
-#define trigPin 9
-#define echoPin 8
+#define trigPin 6
+#define echoPin 7
 
-HRSR04 ultrasoon(9, 8);
+HRSR04 ultrasoon(trigPin, echoPin);
 
 void setup() {
   
