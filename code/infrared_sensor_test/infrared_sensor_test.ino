@@ -1,7 +1,7 @@
-#define sensor1 2   // Sensor 1 op pin D8
-#define sensor2 3   // Sensor 2 op pin D9
-#define sensor3 4  // Sensor 3 op pin D10
-#define sensor4 5  // Sensor 4 op pin D11
+#define sensor1 2  // Sensor 1 op pin D2
+#define sensor2 3  // Sensor 2 op pin D3
+#define sensor3 4  // Sensor 3 op pin D4
+#define sensor4 5  // Sensor 4 op pin D5
 
 int sensorState1 = 0;
 int sensorState2 = 0;
