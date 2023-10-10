@@ -1,13 +1,9 @@
 #define trigPin 9
 #define echoPin 8
 
-long duration;
-int distance;
-int refreshRateUS;
-int i = 0;
-
-int readings[4];
-int average;
+uint32_t duration;
+uint8_t distance;
+uint8_t refreshRateUS = 10;
 
 constexpr uint8_t FILTER_SHIFT = 4U; // Parameter K
 uint16_t
@@ -18,7 +14,6 @@ simpleRecursiveFilter(uint16_t filterInput) {
         // Scale output for unity gain.
         return (filterReg >> FILTER_SHIFT);
     }
-
 
 void setup() {
   Serial.begin(9600);
@@ -42,17 +37,18 @@ void loop() {
   duration = pulseIn(echoPin, HIGH);
 
   // Omrekenen van tijd naar afstand
-  distance = duration / 29 / 2;
-
+  distance = duration / 58;
   
     uint16_t tmp = simpleRecursiveFilter(distance);
-    Serial.println(tmp);
-
 
   // Print afstand in serial monitor
-  // Serial.print("Distance: ");
-  // Serial.println(distance);
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.print(", Duration: ");
+  Serial.print(duration);
+  Serial.print(", AVG: ");
+  Serial.println(tmp);
 
-  // delay(refreshRateUS);
-
+  // kleine delay, ter voorkoming van afwijkende metingen 
+   delay(refreshRateUS);
 }
