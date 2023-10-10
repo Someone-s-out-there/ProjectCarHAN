@@ -1,13 +1,14 @@
 #include "Arduino.h"
 #include "Mode_Select.h"
-#include "Modes/Mode_Manual.h"
-#include "Modes/Mode_Slave.h"
-#include "Modes/Mode_Autonomous.h"
+#include "Mode_Manual.h"
+#include "Mode_Slave.h"
+#include "Mode_Autonomous.h"
 #include "display.h"
+#include "userTime.h"
 
-#define SW1 A0
-#define SW2 A1
-#define SW3 A2
+#define SW1 6//A0
+#define SW2 5//A1
+#define SW3 4//A2
 
 #define READSW1() !digitalRead(SW1)
 #define READSW2() !digitalRead(SW2)
@@ -17,7 +18,8 @@ enum modes
 {
   MANUAL = 'm',
   SLAVE = 's',
-  AUTONOMOUS = 'a'
+  AUTONOMOUS = 'a',
+  STOP = '-'
 };
 
 // Initialize switch variables
@@ -41,8 +43,8 @@ void switchSetup() {
   pinMode(SW3, INPUT_PULLUP);
 
   pinMode(8, OUTPUT);
-  pinMode(A4, OUTPUT);
-  digitalWrite(A4, LOW);
+  pinMode(7/*A4*/, OUTPUT);
+  digitalWrite(7/*A4*/, LOW);
 }
 
 void readSwitches()
@@ -73,6 +75,7 @@ void readSwitches()
       if (switchSelect == 1)
       {
         switchSelect = 0;
+        displayMode(STOP);
         stopMode();
       }
 
@@ -90,6 +93,7 @@ void readSwitches()
       if (switchSelect == 2)
       {
         switchSelect = 0;
+        displayMode(STOP);
         stopMode();
       }
 
@@ -107,6 +111,7 @@ void readSwitches()
       if (switchSelect == 3)
       {
         switchSelect = 0;
+        displayMode(STOP);
         stopMode();
       }
 
@@ -129,6 +134,11 @@ void stopMode()
   while(1)
   {
     readSwitches();
+
+    updateUserTime();
+
+    batteryCycle();
+
 
     // Put stop code here
   }
