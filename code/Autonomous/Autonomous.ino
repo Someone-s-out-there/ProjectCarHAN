@@ -1,6 +1,6 @@
 /*
   By Julian Janssen 
-  10-10-2023
+  12-10-2023
 
   Autonomous control robot-car 
     
@@ -24,10 +24,13 @@
 #define trigPin 6
 #define echoPin 7
 
-#define AFSTAND_OBJECT 40    // 40
+#define AFSTAND_OBJECT 30    // 40
 #define DETECTIE_AFSTAND 55   // 55
 #define STUURLINKS 0
 #define STUURRECHTS 1
+
+#define INTERVALLINKS 30  // Voor de vertraging in de while loop
+#define INTERVALRECHTS INTERVALLINKS * 2
 
 // init de ultrasoon code
 HRSR04 ultrasoon(trigPin, echoPin);
@@ -35,68 +38,68 @@ HRSR04 ultrasoon(trigPin, echoPin);
 // init de motorcontrol code
 MOTORCONTROL motor(EN1, IN1, IN3, EN2, LEFT_LED, RIGHT_LED);
 
-uint8_t rijrichting = 0;
-uint16_t previousMillis = 0;
-uint8_t intervalLinks = 700;
-uint8_t intervalRechts = 1400;
+uint8_t stuurRichting = 0;
+
+
+    // Defineer currentMillis tijd
+    uint32_t currentMillis = millis();
 
 void setup() {
 
   Serial.begin(9600);
 
   //Verander de standaard PWM signaal naar 70 van 150
-  motor.setSpeed(150);
+  motor.setSpeed(1700);
 }
 
 void loop() 
 {
   uint16_t afstand = ultrasoon.getDistance();
   Serial.println(afstand);
+  delay(20);
 
-    if (afstand < AFSTAND_OBJECT && rijrichting == STUURLINKS)
-     {
-      Serial.print("Links af ");
-      Serial.print(afstand);
-      Serial.print(", ");
-      Serial.println(rijrichting);
+  if(afstand < AFSTAND_OBJECT)
+  {
+    Serial.println(currentMillis);
+    Serial.print("HIT");
+    
+    uint8_t vertraging = 0;
 
-      uint32_t currentMillis = millis();
-
-      // Voorkant obstakel, sla links af
-      while (currentMillis - previousMillis <= intervalLinks || afstand > DETECTIE_AFSTAND)
-      {
-        previousMillis = currentMillis;
-       afstand = ultrasoon.getDistance();
-       motor.left();
-      }
-      if(afstand < AFSTAND_OBJECT && currentMillis - previousMillis >= intervalLinks )
-      {
-        rijrichting = STUURRECHTS;
-      }
-     }
-      else if (afstand < AFSTAND_OBJECT && rijrichting == STUURRECHTS)
-     {
-      Serial.print("Rechts af ");
-      Serial.print(afstand);
-      Serial.print(", ");
-      Serial.println(rijrichting);
-
-      uint32_t currentMillis = millis();
-      // Voorkant obstakel, sla links af
-      while (currentMillis - previousMillis <= intervalRechts || afstand > DETECTIE_AFSTAND)
-      {
-        previousMillis = currentMillis;
-       afstand = ultrasoon.getDistance();
-       motor.right();
-      }
-      if(afstand < AFSTAND_OBJECT && currentMillis - previousMillis >= intervalRechts )
-      {
-        rijrichting = 2;
-      }
-    } 
-    else 
+    // Stuur Links
+    while(vertraging <= INTERVALLINKS && stuurRichting == STUURLINKS && afstand < AFSTAND_OBJECT) 
     {
-      motor.forward();
-      rijrichting = STUURLINKS;
+      vertraging++;
+    Serial.print("vertraging: ");
+    Serial.println(vertraging);
+
+    motor.left();
+    afstand = ultrasoon.getDistance();
+    delay(20);
+
+    Serial.println("Stuur Links");
+
     }
+    if(vertraging > 25)
+    {
+      stuurRichting = STUURRECHTS;
+    }
+
+      while(vertraging <= INTERVALRECHTS && stuurRichting == STUURRECHTS && afstand < AFSTAND_OBJECT)
+        {
+      vertraging++;
+      Serial.print("vertraging: ");
+      Serial.println(vertraging);
+
+    motor.right();
+    afstand = ultrasoon.getDistance();
+    delay(20);
+
+    Serial.println("Stuur rechts");
+    }
+      }
+  else
+  {
+  motor.forward();
+  stuurRichting = STUURLINKS;
+  }
  }
