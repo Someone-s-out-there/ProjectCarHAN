@@ -37,5 +37,5 @@ uint16_t HRSR04::getDistance() {
   // Omrekenen van tijd naar afstand
   distance = duration / 58;
 
-  return simpleRecursiveFilter(distance);
+  return distance; //simpleRecursiveFilter(distance);
 }
