@@ -9,20 +9,28 @@
 */
 #include "ultrasoon.h"
 
-HRSR04::HRSR04(uint8_t Trigger, uint8_t Echo) : _Trigger(Trigger), _Echo(Echo) {
+
+// constructor van de HRSR04 klasse,
+// @params triggerpin, echo pin
+HRSR04::HRSR04(uint8_t Trigger, uint8_t Echo)
+  : _Trigger(Trigger), _Echo(Echo) {
   pinMode(_Trigger, OUTPUT);
   pinMode(_Echo, INPUT);
 }
 
+// filtercode  voor de afstand
 uint16_t HRSR04::simpleRecursiveFilter(uint16_t filterInput) {
-  static uint16_t filterReg; // Delay element - 32 bits
+  static uint16_t filterReg;  // Delay element - 32 bits
 
   filterReg = filterReg - (filterReg >> FILTER_SHIFT) + filterInput;
   // Scale output for unity gain.
   return (filterReg >> FILTER_SHIFT);
 }
 
+
+// functie om de afstand op te halen die de ultrasoon sensor meet
 uint16_t HRSR04::getDistance() {
+
   digitalWrite(_Trigger, LOW);
   delayMicroseconds(2);
   // Stuurt een geluidsgolf van 10 microseconden lang uit
@@ -36,5 +44,5 @@ uint16_t HRSR04::getDistance() {
   // Omrekenen van tijd naar afstand
   distance = duration / 58;
 
-  return distance; // simpleRecursiveFilter(distance);
+  return distance;  // simpleRecursiveFilter(distance);
 }
