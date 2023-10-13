@@ -1,22 +1,21 @@
 /*
-  By Julian Janssen 
+  By Julian Janssen
   Version 1.0
   06-10-2023
 
-  Concept Ultrasoon with class HRSR04 
+  Concept Ultrasoon with class HRSR04
 
   Use Serial monitor on 9600 baud
 */
 #include "ultrasoon.h"
 
-HRSR04::HRSR04(uint8_t Trigger, uint8_t Echo)
-  : _Trigger(Trigger), _Echo(Echo) {
+HRSR04::HRSR04(uint8_t Trigger, uint8_t Echo) : _Trigger(Trigger), _Echo(Echo) {
   pinMode(_Trigger, OUTPUT);
   pinMode(_Echo, INPUT);
 }
 
 uint16_t HRSR04::simpleRecursiveFilter(uint16_t filterInput) {
-  static uint16_t filterReg;  // Delay element - 32 bits
+  static uint16_t filterReg; // Delay element - 32 bits
 
   filterReg = filterReg - (filterReg >> FILTER_SHIFT) + filterInput;
   // Scale output for unity gain.
@@ -37,5 +36,5 @@ uint16_t HRSR04::getDistance() {
   // Omrekenen van tijd naar afstand
   distance = duration / 58;
 
-  return distance; //simpleRecursiveFilter(distance);
+  return distance; // simpleRecursiveFilter(distance);
 }
