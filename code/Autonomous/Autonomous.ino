@@ -25,7 +25,8 @@
 #define trigPin1 6
 #define trigPin3 6
 
-// De minimale afstand tussen robotauto en object om niet tegen een object te botsen
+// De minimale afstand tussen robotauto en object om niet tegen een object te
+// botsen
 #define AFSTAND_OBJECT 30
 
 // Naamgeving om code leesbaarder te maken
@@ -34,19 +35,22 @@
 #define STUURRECHTS 1
 
 // Een de vertraging in de while loop voor het sturen
-// INTERVALRECHTS moet minimaal het dubbele zijn van INTERVALLINK, omdat de robotauto van links terug moet sturen naar rechts
+// INTERVALRECHTS moet minimaal het dubbele zijn van INTERVALLINK, omdat de
+// robotauto van links terug moet sturen naar rechts
 #define INTERVALLINKS 30
 #define INTERVALRECHTS INTERVALLINKS * 2
 
 // Initialiseer de ultrasoon code
-HRSR04 ultrasoon(trigPin, echoPin);
+
+HRSR04 ultrasoon1(trigPin1, echoPin);
+HRSR04 ultrasoon2(trigPin2, echoPin);
+HRSR04 ultrasoon3(trigPin3, echoPin);
 
 // Initialiseer de motorcontrol code
 MOTORCONTROL motor(EN1, IN1, IN3, EN2, LEFT_LED, RIGHT_LED);
 
 // Variabele om stuurrichting te bepalen
 uint8_t stuurRichting = 0;
-
 
 /*======================*\
  *      Setup code      *
@@ -63,46 +67,54 @@ void setup() {
 }
 
 void loop() {
-  // Haal afstand op van de ultrasoon sensor, en sla deze op in de variable afstand
-  uint16_t afstand = ultrasoon.getDistance();
+  // Haal afstand op van de ultrasoon sensor, en sla deze op in de variable
+  // afstand
+  uint16_t afstand = ultrasoon1.getDistance();
 
-  //Korte delay, tegen artifacts door te vaak de afstand op te vragen bij de ultrasoon sensor
+  // Korte delay, tegen artifacts door te vaak de afstand op te vragen bij de
+  // ultrasoon sensor
   delay(20);
 
-  // Code die alleen uitgevoerd wordt als de afstand korter is dan de AFSTAND_OBJECT waarde
+  // Code die alleen uitgevoerd wordt als de afstand korter is dan de
+  // AFSTAND_OBJECT waarde
   if (afstand < AFSTAND_OBJECT) {
     // Maak een tijdelijke variabele aan die vertraging heet
-    // Deze wordt gebruikt om de maximale tijd bij te houden voor het sturen, zodat het een kwartslag draaien is
+    // Deze wordt gebruikt om de maximale tijd bij te houden voor het sturen,
+    // zodat het een kwartslag draaien is
     uint8_t vertraging = 0;
 
     // Code in while loop om naar links te sturen
-    while (vertraging <= INTERVALLINKS && stuurRichting == STUURLINKS && afstand < AFSTAND_OBJECT) {
+    while (vertraging <= INTERVALLINKS && stuurRichting == STUURLINKS &&
+           afstand < AFSTAND_OBJECT) {
       vertraging++;
       Serial.print("vertraging: ");
       Serial.println(vertraging);
 
       motor.left();
-      afstand = ultrasoon.getDistance();
-      //Korte delay, tegen artifacts door te vaak de afstand op te vragen bij de ultrasoon sensor
+      afstand = ultrasoon1.getDistance();
+      // Korte delay, tegen artifacts door te vaak de afstand op te vragen bij
+      // de ultrasoon sensor
       delay(20);
 
       Serial.println("Stuur Links");
     }
     // Na 25 keer checken nog steeds een object? tijd om naar rechts te sturen
     if (vertraging > 25) {
-      //Verander de stuurrichting naar rechts
+      // Verander de stuurrichting naar rechts
       stuurRichting = STUURRECHTS;
     }
 
     // Code in while loop om naar rechts te sturen
-    while (vertraging <= INTERVALRECHTS && stuurRichting == STUURRECHTS && afstand < AFSTAND_OBJECT) {
+    while (vertraging <= INTERVALRECHTS && stuurRichting == STUURRECHTS &&
+           afstand < AFSTAND_OBJECT) {
       vertraging++;
       Serial.print("vertraging: ");
       Serial.println(vertraging);
 
       motor.right();
-      afstand = ultrasoon.getDistance();
-      //Korte delay, tegen artifacts door te vaak de afstand op te vragen bij de ultrasoon sensor
+      afstand = ultrasoon1.getDistance();
+      // Korte delay, tegen artifacts door te vaak de afstand op te vragen bij
+      // de ultrasoon sensor
       delay(20);
 
       Serial.println("Stuur rechts");
@@ -110,7 +122,7 @@ void loop() {
   } else {
     motor.forward();
 
-    //Verander de stuurrichting naar links
+    // Verander de stuurrichting naar links
     stuurRichting = STUURLINKS;
   }
 }
