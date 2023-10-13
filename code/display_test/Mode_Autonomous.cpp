@@ -8,11 +8,15 @@ void autonomousMode()
 {
   Serial.println("MODE: AUTONOMOUS");
 
+  displayMode(AUTONOMOUS);
+
   while(1)
   {
     readSwitches();
 
-    updateUserTime();
+    displaySpeed(0.0);
+
+    //updateUserTime();
 
     batteryCycle();
 

@@ -8,11 +8,15 @@ void manualMode()
 {
   Serial.println("MODE: MANUAL");
 
+  displayMode(MANUAL);
+
   while(1)
   {
     readSwitches();
 
-    updateUserTime();
+    displaySpeed(0.0);
+    
+    //updateUserTime();
 
     batteryCycle();
 
