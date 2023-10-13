@@ -20,8 +20,7 @@
 #define trigPin2 6
 #define echoPin 7
 
-// De minimale afstand tussen robotauto en object om niet tegen een object te
-// botsen
+// De minimale afstand tussen robotauto en object om niet tegen een object aan te botsen
 #define AFSTAND_OBJECT 30
 
 // Naamgeving om code leesbaarder te maken
@@ -36,7 +35,6 @@
 #define INTERVALRECHTS INTERVALLINKS * 2
 
 // Initialiseer de ultrasoon code
-
 HRSR04 ultrasoon1(trigPin1, echoPin);
 HRSR04 ultrasoon2(trigPin2, echoPin);
 HRSR04 ultrasoon3(trigPin3, echoPin);
