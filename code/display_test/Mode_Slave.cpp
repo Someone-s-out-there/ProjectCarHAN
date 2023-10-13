@@ -8,11 +8,15 @@ void slaveMode()
 {
   Serial.println("MODE: SLAVE");
 
+  displayMode(SLAVE);
+
   while(1)
   {
     readSwitches();
 
-    updateUserTime();
+    displaySpeed(0.0);
+
+    //updateUserTime();
 
     batteryCycle();
 

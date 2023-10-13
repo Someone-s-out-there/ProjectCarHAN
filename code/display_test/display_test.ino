@@ -5,15 +5,6 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-enum motorDirection
-{
-  STILL = 's',
-  FORWARD = 'f',
-  BACKWARD = 'b',
-  LEFT = 'l',
-  RIGHT = 'r'
-};
-
 void setup() {
   Serial.begin(9600);
   switchSetup();
@@ -25,11 +16,15 @@ void setup() {
 
   displayDirection(STILL);
 
+  displayMode(STOP);
+
   getUserTime();
 }
 
 void loop() {
-  updateUserTime();
+  displaySpeed(0.0);
+
+  //updateUserTime();
 
   batteryCycle();
 
