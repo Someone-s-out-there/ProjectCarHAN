@@ -4,15 +4,6 @@
 
 extern LiquidCrystal_I2C lcd;
 
-enum motorDirection
-{
-  STILL = 's',
-  FORWARD = 'f',
-  BACKWARD = 'b',
-  LEFT = 'l',
-  RIGHT = 'r'
-};
-
 struct chars
 {
   byte batteryRightHigh[8] = 
@@ -220,35 +211,86 @@ void displayBattery(uint8_t batteryPercentage)
   }
 }
 
+uint32_t currentModeMillis;
+uint32_t previousModeMillis;
+uint16_t modeInterval = 3000;
+bool display_speed = false;
+bool speedWillShow = false;
+bool speedUpdate = false;
+
 void displayMode(char mode)
 {
+  display_speed = false;
+  previousModeMillis = millis();
+  Serial.println(previousModeMillis);
+
   switch (mode)
   {
     case 'm':
       lcd.setCursor(0, 0);
       lcd.write(byte(6));
-      lcd.print("Manual");
+      lcd.print("Manual   ");
+
+      speedWillShow = true;
+      speedUpdate = true;
       break;
     case 's':
       lcd.setCursor(0, 0);
       lcd.write(byte(6));
-      lcd.print("Slave ");
+      lcd.print("Slave    ");
+
+      speedWillShow = true;
+      speedUpdate = true;
       break;
     case 'a':
       lcd.setCursor(0, 0);
       lcd.write(byte(6));
-      lcd.print("Auto  ");
+      lcd.print("Auto     ");
+
+      speedWillShow = true;
+      speedUpdate = true;
       break;
     case '-':
       lcd.setCursor(0, 0);
       lcd.write(byte(7));
-      lcd.print("      ");
+      lcd.print("         ");
+
+      speedWillShow = false;
       break;
     default:
       lcd.setCursor(0, 0);
-      lcd.write(byte(6));
-      lcd.print("Error ");
+      lcd.write(byte(7));
+      lcd.print("Error    ");
+
+      speedWillShow = false;
       break;
+  }
+}
+
+float previousSpeed = 1000.0;
+
+void displaySpeed(float speed)
+{
+  currentModeMillis = millis();
+
+  if (currentModeMillis - previousModeMillis >= modeInterval && speedWillShow == true)
+  {
+    display_speed = true;
+  } 
+  
+  if (display_speed == true)
+  {
+    if (speedUpdate || previousSpeed != speed)
+    {
+      lcd.setCursor(1, 0);
+      lcd.print("      ");
+
+      lcd.setCursor(1, 0);
+      lcd.print(String(speed) + " km/h");
+
+      speedUpdate = false;
+      previousSpeed = speed;
+    }
   }
 }
 
@@ -262,11 +304,6 @@ void displayTimeUsed(uint32_t hours, uint32_t minutes)
   lcd.setCursor(0, 1);
   lcd.print(String(hours) + String("h ") + String(minutes) + String("m"));
 }
-
-// displaySpeed(int measuredSpeed)
-// {
-  
-// }
 
 void displayDirection(char direction)
 {
