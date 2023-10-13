@@ -8,9 +8,7 @@
   Use Serial monitor on 9600 baud
 */
 #include "motor_controls.h"
-
 #include <Arduino.h>
-#include <stdint.h>
 
 MOTORCONTROL::MOTORCONTROL(uint8_t enable1, uint8_t pwm2, uint8_t pwm3,
                            uint8_t enable2, uint8_t l_led, uint8_t r_led) {
@@ -74,17 +72,6 @@ void MOTORCONTROL::right() {
   digitalWrite(right_Led, HIGH);
 }
 
-void MOTORCONTROL::backward() {
-  analogWrite(EN_Motor_A, motorSpeed); // pwm
-  digitalWrite(IN1_Motor_A, LOW);
-
-  analogWrite(EN_Motor_B, motorSpeed); // pwm
-  digitalWrite(IN3_Motor_B, LOW);
-
-  digitalWrite(left_Led, LOW);
-  digitalWrite(right_Led, LOW);
-}
-
 void MOTORCONTROL::stop() {
   // code for a gentle stop
   uint8_t hold = motorSpeed;
@@ -108,6 +95,17 @@ void MOTORCONTROL::estop() {
   digitalWrite(IN1_Motor_A, LOW);
 
   analogWrite(EN_Motor_B, 0); // pwm
+  digitalWrite(IN3_Motor_B, LOW);
+
+  digitalWrite(left_Led, LOW);
+  digitalWrite(right_Led, LOW);
+}
+
+void MOTORCONTROL::backward() {
+  analogWrite(EN_Motor_A, motorSpeed); // pwm
+  digitalWrite(IN1_Motor_A, LOW);
+
+  analogWrite(EN_Motor_B, motorSpeed); // pwm
   digitalWrite(IN3_Motor_B, LOW);
 
   digitalWrite(left_Led, LOW);
