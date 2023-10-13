@@ -22,8 +22,10 @@
 #define RIGHT_LED 13
 
 // Pins Ultrasoon sensor
+#define trigPin0 6
 #define trigPin1 6
-#define trigPin3 6
+#define trigPin2 6
+#define echoPin 7
 
 // De minimale afstand tussen robotauto en object om niet tegen een object te
 // botsen
