@@ -1,0 +1,148 @@
+#+AUTHOR: Sjoerd van de Wege
+#+PROPERTY: header-args :tangle CMakeLists.txt
+#+auto_tangle: t
+
+* TABLE OF CONTENTS :toc:
+- [[#set-cmake-version-and-project-name][set cmake version and project name]]
+- [[#mcu-specifics][MCU Specifics]]
+- [[#fuses][FUSES]]
+- [[#toolchain][TOOLCHAIN]]
+- [[#compile-flags-and-definitions][compile flags and definitions]]
+  - [[#compile-defines][compile defines]]
+  - [[#set--mmcu-for-both-the-compiler-and-linker][set -mmcu for both the compiler and linker]]
+- [[#collect-all-source-files][collect all source files]]
+  - [[#needs-to-be-turned-in-to-the-correct-directories-and-stuff][needs to be turned in to the correct directories and stuff]]
+- [[#creating-the-executable-and-other-targets][creating the executable and other targets]]
+
+* set cmake version and project name
+target a relatively old version of Cmake
+and set the name of the project and the outputfile to RobotCar
+
+#+begin_src cmake
+
+cmake_minimum_required(VERSION 3.11)
+project("RobotCar")
+set(PRODUCT_NAME "RobotCar")
+
+#+end_src
+
+* MCU Specifics
+set the variables for the clock speed of the MCU as well as the chip used
+also sets the programmer used to program the chip with avrdude
+
+#+begin_src cmake
+set(F_CPU 16000000UL) # set clock speed to 16 MHZ
+set(MCU atmega328p) # set chip identity full list at (https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html)
+set(PROG_TYPE xplainedmini) # set programming device
+
+#+end_src
+
+* FUSES 
+here we're setting the fuses for the avr chip
+the following calculator can be used: http://eleccelerator.com/fusecalc/fusecalc.php?chip=atmega328p
+#+begin_src cmake
+set(E_FUSE 0xfd)
+set(H_FUSE 0xda)
+set(L_FUSE 0xfd)
+set(LOCK_BIT 0xff)
+
+#+end_src
+
+
+* TOOLCHAIN
+sets the toolchain to be the avr-gcc toolchain
+#+begin_src cmake
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_CXX_COMPILER avr-g++)
+set(CMAKE_C_COMPILER avr-gcc)
+set(CMAKE_ASM_COMPILER avr-gcc)
+
+#+end_src
+
+* compile flags and definitions
+
+** compile defines
+#+begin_src cmake
+
+add_definitions(
+    -DF_CPU=${F_CPU}
+    -DBAUD=${BAUD}
+)
+
+#+end_src
+
+** set -mmcu for both the compiler and linker
+__attribute__ ((fallthrough)); can be used to get rid of fallthrough warnings in switch case statements
+#+begin_src cmake
+
+set(CMAKE_EXE_LINKER_FLAGS -mmcu=${MCU})
+
+add_compile_options(
+    -mmcu=${MCU} # MCU
+    -std=c11 # C11 standard
+    -Os # optimize
+    -Wall # enable warnings
+    -Wundef
+    -Wunused-macros
+    -Wnonnull
+    -Wimplicit-fallthrough
+    -Wmisleading-indentation
+    -Wswitch-default
+    -Wunused-parameter
+    -Wshadow
+    -Wparentheses
+    -Wpacked
+    -Wpadded
+    -Winline
+    -pedantic
+    -Wstrict-prototypes
+    -Wl,--relax,--gc-sections
+    -funsigned-char # a few optimizations
+    -funsigned-bitfields
+    -fpack-struct
+    -fshort-enums
+# optional
+    -fanalyzer
+)
+
+#+end_src
+
+* collect all source files
+collects all source files for the project
+** TODO needs to be turned in to the correct directories and stuff
+#+begin_src cmake
+
+file(GLOB SRC_FILES "src/*.c")
+
+#+end_src
+
+* creating the executable and other targets
+
+#+begin_src cmake
+
+add_executable(${PRODUCT_NAME} ${SRC_FILES})
+# Rename the output to .elf as we will create multiple files
+set_target_properties(${PRODUCT_NAME} PROPERTIES OUTPUT_NAME ${PRODUCT_NAME}.elf)
+
+# Strip binary for upload
+add_custom_target(strip ALL avr-strip ${PRODUCT_NAME}.elf DEPENDS ${PRODUCT_NAME})
+
+# Transform binary into hex file, we ignore the eeprom segments in the step
+add_custom_target(hex ALL avr-objcopy -R .eeprom -O ihex ${PRODUCT_NAME}.elf ${PRODUCT_NAME}.hex DEPENDS strip)
+# Transform binary into hex file, this is the eeprom part (empty if you don't
+# use eeprom static variables)
+add_custom_target(eeprom avr-objcopy -j .eeprom  --set-section-flags=.eeprom="alloc,load"  --change-section-lma .eeprom=0 -O ihex ${PRODUCT_NAME}.elf ${PRODUCT_NAME}.eep DEPENDS strip)
+
+# Upload the firmware with avrdude
+add_custom_target(upload avrdude  -c ${PROG_TYPE} -p ${MCU} -U flash:w:${PRODUCT_NAME}.hex DEPENDS hex)
+
+# Upload the eeprom with avrdude
+# add_custom_target(upload_eeprom avrdude -c ${PROG_TYPE} -p ${MCU}  -U eeprom:w:${PRODUCT_NAME}.eep DEPENDS eeprom)
+
+# Burn fuses
+add_custom_target(fuses avrdude -c ${PROG_TYPE} -p ${MCU}  -U lfuse:w:${L_FUSE}:m -U hfuse:w:${H_FUSE}:m -U efuse:w:${E_FUSE}:m -U lock:w:${LOCK_BIT}:m )
+
+# Clean extra files
+set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${PRODUCT_NAME}.hex;${PRODUCT_NAME}.eeprom;${PRODUCT_NAME}.lst")
+
+#+end_src
