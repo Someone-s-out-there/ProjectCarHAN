@@ -25,18 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - uses: bazhenov/action-avr-make@v1.0
-      
-  zipper:
-    if: steps.build.outputs.exit_code == 0
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - name: Archive Release
-      uses: thedoctor0/zip-release@0.7.1
-      with:
-        type: 'zip'
-        filename: 'release.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig'
-  
-
-      
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.1
+        with:
+          type: 'zip'
+          filename: 'release.zip'
+          exclusions: '*.git* /*node_modules/* .editorconfig'
+      # - name: Upload Release
+      #   uses: ncipollo/release-action@v1.12.0
+      #   with:
+      #     artifacts: "release.zip"
+      #     token: ${{ secrets.GITHUB_TOKEN }}
