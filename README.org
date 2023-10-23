@@ -1,0 +1,26 @@
+#+TITLE: README
+#+AUTHOR: Sjoerd van de Wege
+#+DESCRIPTION
+#+STARTUP: showeverything
+#+OPTIONS: toc:2
+
+
+*  README
+
+Here in this Repository is the code for robotcar for both the first and the second period. for the first period the car was programmed in Arduino.
+now for the second period the car will be programmed in C using avr-libc with Atmel Studio 7.
+
+** compiling
+the program can be compiled using Atmel Studio 7, or using commandline utilities with the make / cmake files.
+** flashing and uploading
+the program can be flashed to the chip using Atmel Studio 7's programming tool.
+If desired Avrdude can also be used from the commandline or using the (c)make build system
+#+begin_src bash
+avrdude -pm328p -c xplainedmini -U flash:w:{FILE}
+#+end_src
+
+
+** Links
+
+[drive](https://drive.google.com/drive/folders/1EaNdhbWhvMzq_1hj-SwhNryWp-9N5PZe?usp=sharing)
+[Atmel Studio](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)

@@ -1,6 +1,0 @@
-{
-    "board": "atmel-avr-xminis:avr:atmega328p_xplained_mini",
-    "programmer": "atmel-avr-xminis:medbg",
-    "sketch": "Mode_Menu.ino",
-    "port": "COM3"
-}
