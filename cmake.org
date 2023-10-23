@@ -82,6 +82,7 @@ add_compile_options(
     -std=c11 # C11 standard
     -Os # optimize
     -Wall # enable warnings
+    -Wextra
     -Wundef
     -Wunused-macros
     -Wnonnull
