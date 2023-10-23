@@ -1,30 +1,37 @@
 #include <LiquidCrystal_I2C.h> 
 #include "display.h"
+#include "userTime.h"
+#include "Mode_Select.h"
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-uint8_t batteryPercentage = 0;
-uint8_t timeUsed = 10;
+enum motorDirection
+{
+  STILL = 's',
+  FORWARD = 'f',
+  BACKWARD = 'b',
+  LEFT = 'l',
+  RIGHT = 'r'
+};
 
 void setup() {
+  Serial.begin(9600);
+  switchSetup();
+
   lcd.init();
   displaySetup();
   lcd.backlight();
   lcd.clear();
 
-  //displayTimeUsed(timeUsed);
+  displayDirection(STILL);
 
-  // displayBattery(10);
+  getUserTime();
 }
 
 void loop() {
-  lcd.clear();
-  displayBattery(batteryPercentage);
-  batteryPercentage += 10;
-  delay(500);
+  updateUserTime();
 
-  if (batteryPercentage > 100)
-  {
-    batteryPercentage = 0;
-  }
+  batteryCycle();
+
+  readSwitches();
 }
