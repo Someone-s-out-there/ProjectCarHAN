@@ -1,0 +1,15 @@
+#+TITLE: to talk about
+#+AUTHOR: Sjoerd van de Wege
+#+DESCRIPTION
+#+STARTUP: showeverything
+
+* to talk about
+
+** review last period
+*** wat ging goed
+*** wat ging niet goed
+** hoe verder
+*** nieuwe folder structuur
+*** correct gebruik git
+*** 1 project to rule them all.
+*** code moet ge reviewed worden voor dat er code ge merged word naar de main of dev branch
