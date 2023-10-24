@@ -11,5 +11,9 @@
 ** hoe verder
 *** nieuwe folder structuur
 *** correct gebruik git
-*** 1 project to rule them all.
+*** 1 project to rule them all. al geconfigured met alle waarschuwingen.
 *** code moet ge reviewed worden voor dat er code ge merged word naar de main of dev branch
+*** structuur van project is nu in basis al gelegd.
+**** de basis van het project bestaat
+**** overleggen over hoe en wat qua folders en structuur voor de sensoren en actoren.
+
