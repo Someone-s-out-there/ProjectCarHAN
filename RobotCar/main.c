@@ -6,13 +6,16 @@
  */ 
 
 #include <avr/io.h>
-
+#include "Appinfo.h"
+#include "Millis.h"
 
 int main(void)
 {
     /* Replace with your application code */
+	
     while (1) 
     {
+		printf("")
     }
 }
 
