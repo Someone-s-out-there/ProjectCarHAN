@@ -48,8 +48,6 @@ add_compile_options(
     -funsigned-bitfields
     -fpack-struct
     -fshort-enums
-# optional
-    -fanalyzer
 )
 
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS "*c")

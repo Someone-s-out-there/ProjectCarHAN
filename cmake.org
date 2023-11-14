@@ -102,8 +102,6 @@ add_compile_options(
     -funsigned-bitfields
     -fpack-struct
     -fshort-enums
-# optional
-    -fanalyzer
 )
 
 #+end_src
