@@ -28,6 +28,7 @@ add_compile_options(
     -std=c11 # C11 standard
     -Os # optimize
     -Wall # enable warnings
+    -Wextra
     -Wundef
     -Wunused-macros
     -Wnonnull
@@ -51,7 +52,10 @@ add_compile_options(
     -fanalyzer
 )
 
-file(GLOB SRC_FILES "src/*.c")
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS "*c")
+file(GLOB_RECURSE REMOVE_CMAKE "build/*" "extern/*" )
+list(REMOVE_ITEM SRC_FILES ${REMOVE_CMAKE})
+include_directories("/home/sjoerd/opt/avr/avr/include")
 
 add_executable(${PRODUCT_NAME} ${SRC_FILES})
 # Rename the output to .elf as we will create multiple files
