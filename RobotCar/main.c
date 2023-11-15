@@ -10,6 +10,13 @@
 
 int main(void)
 {
+<<<<<<< HEAD
+=======
+  uart_init();
+  DDRB |= (1<<DDB5);
+  uart_puts("test");
+  /* Replace with your application code */
+>>>>>>> 676c9c9 (removed fuck)
   while (1) 
 	{}
 }
