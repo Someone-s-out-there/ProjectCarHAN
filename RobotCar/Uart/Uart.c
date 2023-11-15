@@ -1,6 +1,6 @@
 #include "Uart.h"
 
-extern uint8_t Charakter;
+extern volatile uint8_t Charakter;
 static RXBuff_t *rxbuffer_p = NULL;
 
 void uart_putc(uint8_t chData) {
