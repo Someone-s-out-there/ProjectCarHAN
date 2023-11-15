@@ -15,7 +15,7 @@ int main(void)
 {
   uart_init();
   DDRB |= (1<<DDB5);
-  uart_puts("fuck\n");
+  uart_puts("test");
   /* Replace with your application code */
   while (1) 
 	      {
