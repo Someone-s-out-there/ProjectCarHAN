@@ -10,12 +10,14 @@
 #include <util/delay.h>
 
 volatile uint8_t Charakter = 0;
+volatile RXBuff_t buffer;
 
 int main(void) {
   uart_init();
   DDRB |= (1 << DDB5);
   uart_puts("test");
-  /* Replace with your application code */
+  uart_set_rxBuffer(&buffer);
+    /* Replace with your application code */
   while (1) {
     // uart_puts("f");
     if (Charakter != 0) {

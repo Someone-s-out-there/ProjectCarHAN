@@ -1,7 +1,7 @@
 #include "Uart.h"
 
 extern volatile uint8_t Charakter;
-static RXBuff_t *rxbuffer_p = NULL;
+static volatile  RXBuff_t *rxbuffer_p = NULL;
 
 void uart_putc(uint8_t chData) {
   loop_until_bit_is_set(UCSR0A, UDRE0);
@@ -37,19 +37,18 @@ void uart_set_rxBuffer(RXBuff_t *rxb) {
 }
 
 ISR(USART_RX_vect) {
-  //if (rxbuffer_p == NULL) {
-  //  PORTB|=(1<<PORTB5);
-  //return;
-  //}
-  PORTB ^= (1<<PINB5);
-  uint8_t c = UDR0;
-  Charakter = c;
-  //rxbuffer_p->buffer[rxbuffer_p->buffer_IDX] = c;
+    if (rxbuffer_p == NULL) {
+      PORTB|=(1<<PORTB5);
+      return;
+    }
+    PORTB ^= (1<<PINB5);
+    uint8_t c = UDR0;
+    rxbuffer_p->buffer[rxbuffer_p->buffer_IDX] = c;
 
-  //  if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
-  //rxbuffer_p->linecomplete = 1;
-  //} else {
-  //rxbuffer_p->buffer_IDX++;
-  // }
+    if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
+      rxbuffer_p->linecomplete = 1;
+    } else {
+      rxbuffer_p->buffer_IDX++;
+    }
 
 }
