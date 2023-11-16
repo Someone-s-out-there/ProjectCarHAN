@@ -6,13 +6,12 @@
  */ 
 
 #include <avr/io.h>
-
+#include "IR_Sensors/IR.h"
 
 int main(void)
 {
-    /* Replace with your application code */
-    while (1) 
-    {
-    }
+  while (1) 
+	{}
 }
+
 

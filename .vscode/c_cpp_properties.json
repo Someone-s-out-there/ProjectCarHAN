@@ -581,6 +581,22 @@
                 "__BUILTIN_AVR_FMUL=1",
                 "USBCON"
             ]
+        },
+        {
+            "name": "AVR_sjoerd",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/sjoerd/opt/avr/avr/include",
+                "/home/sjoerd/Documents/dev/ProjectCarHAN/RobotCar"
+            ],
+            "defines": [],
+            "compilerPath": "/home/sjoerd/opt/avr/bin/avr-gcc",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x86",
+            "compilerArgs": [
+                "-mmcu=atmega328p"
+            ]
         }
     ]
 }
