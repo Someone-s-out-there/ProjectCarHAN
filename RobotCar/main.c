@@ -17,7 +17,8 @@ int main(void) {
   DDRB |= (1 << DDB5);
   uart_puts("test");
   uart_set_rxBuffer(&buffer);
-    /* Replace with your application code */
+  
+  /* Replace with your application code */
   while (1) {
     // uart_puts("f");
     if (Charakter != 0) {
