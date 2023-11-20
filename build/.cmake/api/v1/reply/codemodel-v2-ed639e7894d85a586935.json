@@ -1,0 +1,105 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.11"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "RobotCar",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "RobotCar::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RobotCar-Debug-a15a0b65319285fcfe34.json",
+					"name" : "RobotCar",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "eeprom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-eeprom-Debug-679e6e274911a2fe9456.json",
+					"name" : "eeprom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "fuses::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fuses-Debug-350c4cf8e9e4cb333f6a.json",
+					"name" : "fuses",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "hex::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-hex-Debug-7b678fb406b133378d9a.json",
+					"name" : "hex",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "strip::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-strip-Debug-78e9fcffaa543e7e8187.json",
+					"name" : "strip",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "upload::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-upload-Debug-50bd695c9edba7e62b2a.json",
+					"name" : "upload",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/sjoerd/Documents/dev/ProjectCarHAN/build",
+		"source" : "/home/sjoerd/Documents/dev/ProjectCarHAN"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
