@@ -24,3 +24,4 @@ avrdude -pm328p -c xplainedmini -U flash:w:{FILE}
 
 [drive](https://drive.google.com/drive/folders/1EaNdhbWhvMzq_1hj-SwhNryWp-9N5PZe?usp=sharing)
 [Atmel Studio](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
+[avr-libc] (https://www.nongnu.org/avr-libc/user-manual/index.html)
