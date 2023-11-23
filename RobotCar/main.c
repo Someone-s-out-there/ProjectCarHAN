@@ -12,8 +12,6 @@
 uint8_t Charakter = 0;
 
 int main(void) {
-<<<<<<< HEAD
-=======
   uart_init();
   DDRB |= (1 << DDB5);
   uart_puts("fuck\n");
@@ -27,8 +25,5 @@ int main(void) {
       uart_puts("a\n");
       Charakter = 0;
     }
-  }
->>>>>>> 676c9c9 (removed fuck)
-  while (1) {
   }
 }

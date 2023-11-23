@@ -12,9 +12,9 @@ set(L_FUSE 0xfd)
 set(LOCK_BIT 0xff)
 
 set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_CXX_COMPILER avr-g++)
-set(CMAKE_C_COMPILER avr-gcc)
-set(CMAKE_ASM_COMPILER avr-gcc)
+set(CMAKE_CXX_COMPILER /home/sjoerd/opt/avr/bin/avr-g++)
+set(CMAKE_C_COMPILER /home/sjoerd/opt/avr/bin/avr-gcc)
+set(CMAKE_ASM_COMPILER /home/sjoerd/opt/avr/bin/avr-gcc)
 
 add_definitions(
     -DF_CPU=${F_CPU}
