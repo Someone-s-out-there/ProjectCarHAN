@@ -140,10 +140,16 @@
     <Compile Include="Functions\Appinfo.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Functions\Millis\Millis.c">
+    <Compile Include="Functions\Buttons\mode_select.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Functions\Millis\Millis.h">
+    <Compile Include="Functions\Buttons\mode_select.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Functions\millis\millis.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Functions\millis\millis.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Functions\Pinmap.h">
@@ -154,9 +160,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Buttons" />
     <Folder Include="Functions" />
-    <Folder Include="Functions\Millis" />
+    <Folder Include="Functions\Buttons\" />
+    <Folder Include="Functions\millis" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

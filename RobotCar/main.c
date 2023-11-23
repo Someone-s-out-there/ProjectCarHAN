@@ -8,16 +8,14 @@
 #include <avr/io.h>
 #include "Functions/Appinfo.h"
 #include "Functions/millis/millis.h"
+#include "Buttons/mode_select.h"
 
 int main(void)
 {
-	millis_init();
-	
-	sei();
 	
     while (1) 
     {
-
+		readSwitches();
     }
 }
 

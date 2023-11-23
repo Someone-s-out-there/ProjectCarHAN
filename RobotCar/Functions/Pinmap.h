@@ -47,8 +47,14 @@ DDRB |= (OUTPUT << H_LEFT) |
 		
 DDRC |= (INPUT << SW1) |
 		(INPUT << US2_ECHO) |
-		(INPUT << US3_ECHO);
+		(INPUT << US3_ECHO) |
 		//Analog input DDC3 not initialized
+		
+		(OUTPUT << DDC4); //
+PORTC |= (INPUT << DDC4); // tijdelijk voor test
+
+//Set pullup for SW1 pin
+PORTC |= (OUTPUT << SW1);
 		
 DDRD |= (INPUT << IR1) |
 		(INPUT << IR2) |
