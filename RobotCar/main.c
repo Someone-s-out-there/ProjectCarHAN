@@ -6,16 +6,18 @@
  */ 
 
 #include <avr/io.h>
-#include "Appinfo.h"
-#include "Millis.h"
+#include "Functions/Appinfo.h"
+#include "Functions/millis/millis.h"
 
 int main(void)
 {
-    /* Replace with your application code */
+	millis_init();
+	
+	sei();
 	
     while (1) 
     {
-		printf("")
+
     }
 }
 
