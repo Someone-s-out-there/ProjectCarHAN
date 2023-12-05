@@ -13,4 +13,18 @@ typedef struct {
 
 void motor_init(MotorDRV *m);
 
+void setSpeed(int speed);
+
+void foward(void);
+
+void backward(void);
+
+void left(void);
+
+void right(void);
+
+void stop(void);
+
+void estop(void);
+
 #endif
