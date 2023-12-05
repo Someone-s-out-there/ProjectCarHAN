@@ -62,22 +62,6 @@ void uart_set_rxBuffer(RXBuff_t *rxb) {
 }
 
 /**
- * \brief
- * \param fifo sets the internal storage to fifo
- */
-void uart_set_fifo(fifo_t* fifo)
-{
-  fifobuffer = fifo;
-
-}
-uint8_t uart_linecomplete(void)
-{
-  return uart_linecomplete;
-}
-
-#define UART_FIFO
-
-/**
  * @brief interrupt service routine. this gets a character from UDR0(uart data
  * register) and stores it in uint8_t c and places it at the end of the buffer.
  * then checks if the character was a '\n' or the end of the buffer has been
@@ -90,7 +74,7 @@ ISR(USART_RX_vect) {
   }
   PORTB ^= (1 << PINB5);
   const uint8_t c = UDR0;
-#ifndef UART_FIFO
+
   rxbuffer_p->buffer[rxbuffer_p->buffer_IDX] = c;
 
   if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
@@ -98,12 +82,4 @@ ISR(USART_RX_vect) {
   } else {
     rxbuffer_p->buffer_IDX++;
   }
-#endif
-#ifdef UART_FIFO
-  FIFO_push(fifobuffer,c);
-  if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
-    linecomplete = 1;
-  }
-  #endif
-
 }
