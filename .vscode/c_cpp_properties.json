@@ -12,7 +12,9 @@
             "forcedInclude": [],
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "defines": []
+            "defines": [],
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "configurationProvider": "ms-vscode.cmake-tools"
         },
         {
             "name": "arduino",
