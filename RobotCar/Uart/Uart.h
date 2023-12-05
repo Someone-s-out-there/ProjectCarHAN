@@ -22,10 +22,10 @@
  * size indicator when linecomplete is true
  */
 typedef struct {
-    uint8_t buffer[UART_BUFFER_SIZE];
-    // uint8_t buffer_size;
-    uint8_t buffer_IDX;
-    uint8_t linecomplete;
+  uint8_t *buffer; //[UART_BUFFER_SIZE];
+  // uint8_t buffer_size;
+  uint8_t buffer_IDX;
+  uint8_t linecomplete;
 } RXBuff_t;
 
 void uart_init(void);
