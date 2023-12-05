@@ -4,10 +4,12 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <avr/sfr_defs.h>
-#include <stddef.h>
 #include <stdint.h>
 
+#ifndef F_CPU
 #define F_CPU 16000000ul
+#endif
+
 #define UART_BAUD 9600
 #define BAUD_PRESCALER (((F_CPU / (UART_BAUD * 16UL))) - 1)
 
