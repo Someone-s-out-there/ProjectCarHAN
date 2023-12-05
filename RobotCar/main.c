@@ -5,19 +5,16 @@
  * Author : Sjoerd
  */
 
-#include "Uart/Uart.h"
-#include <avr/io.h>
 #include "Functions/Appinfo.h"
-#include "Functions/millis/millis.h"
 #include "Functions/Buttons/mode_select.h"
+#include "Functions/millis/millis.h"
+#include <avr/io.h>
 
-int main(void)
-{
-	IO_init();
-	millis_init();
-	
-    while (1) 
-    {
-		readSwitches();
-    }
+int main(void) {
+  IO_init();
+  millis_init();
+
+  while (1) {
+    readSwitches();
+  }
 }
