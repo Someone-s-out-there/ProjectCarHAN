@@ -5,6 +5,7 @@
 #include <avr/io.h>
 #include <avr/sfr_defs.h>
 #include <stdint.h>
+#include "../DataTypes/FIFO.h"
 
 #ifndef F_CPU
 #define F_CPU 16000000ul
@@ -28,8 +29,9 @@ typedef struct {
 } RXBuff_t;
 
 void uart_init(void);
-void uart_puts(uint8_t *s);
+void uart_puts(const uint8_t *s);
 void uart_set_rxBuffer(RXBuff_t *rxb);
+void uart_set_fifo(fifo_t* fifo);
 
 #endif
 

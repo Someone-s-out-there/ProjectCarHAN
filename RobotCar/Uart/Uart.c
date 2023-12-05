@@ -1,13 +1,18 @@
 #include "Uart.h"
 
+#include <stddef.h>
+#include <avr/interrupt.h>
+
 extern volatile uint8_t Charakter;
 static volatile RXBuff_t *rxbuffer_p = NULL;
+static volatile fifo_t *fifobuffer = NULL;
+static volatile uint8_t linecomplete = 0;
 
 /**
  * @brief waits until the uart data register is empty then writes the chData to
  * the register
  */
-void uart_putc(uint8_t chData) {
+void uart_putc(const uint8_t chData) {
   loop_until_bit_is_set(UCSR0A, UDRE0);
   //   while ((UCSR0A & (1 << UDRE0)) == 0);
   UDR0 = chData;
@@ -31,7 +36,7 @@ void uart_init(void) {
  * @brief loops over a passed in string pointer for each byte it calls @ref
  * uart_putc
  */
-void uart_puts(uint8_t *s) {
+void uart_puts(const uint8_t *s) {
   while (*s) {
     uart_putc(*s);
     s++;
@@ -57,6 +62,22 @@ void uart_set_rxBuffer(RXBuff_t *rxb) {
 }
 
 /**
+ * \brief
+ * \param fifo sets the internal storage to fifo
+ */
+void uart_set_fifo(fifo_t* fifo)
+{
+  fifobuffer = fifo;
+
+}
+uint8_t uart_linecomplete(void)
+{
+  return uart_linecomplete;
+}
+
+#define UART_FIFO
+
+/**
  * @brief interrupt service routine. this gets a character from UDR0(uart data
  * register) and stores it in uint8_t c and places it at the end of the buffer.
  * then checks if the character was a '\n' or the end of the buffer has been
@@ -68,7 +89,8 @@ ISR(USART_RX_vect) {
     return;
   }
   PORTB ^= (1 << PINB5);
-  uint8_t c = UDR0;
+  const uint8_t c = UDR0;
+#ifndef UART_FIFO
   rxbuffer_p->buffer[rxbuffer_p->buffer_IDX] = c;
 
   if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
@@ -76,4 +98,12 @@ ISR(USART_RX_vect) {
   } else {
     rxbuffer_p->buffer_IDX++;
   }
+#endif
+#ifdef UART_FIFO
+  FIFO_push(fifobuffer,c);
+  if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
+    linecomplete = 1;
+  }
+  #endif
+
 }
