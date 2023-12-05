@@ -3,8 +3,6 @@
 
 MotorDRV motor;
 
-void other() { motor.backward(); }
-
 void motor_init(MotorDRV *m) {
   m->setSpeed = &setSpeed;
   m->foward = &foward;
