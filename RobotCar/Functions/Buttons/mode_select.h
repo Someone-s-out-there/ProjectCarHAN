@@ -11,9 +11,8 @@
 
 #include <avr/io.h>
 #include "../Pinmap.h"
-#include "Functions/millis/millis.h"
+#include "../millis/millis.h"
 
-void readSwitches();
-
+void readSwitches(void);
 
 #endif /* MODE_SELECT_H_ */

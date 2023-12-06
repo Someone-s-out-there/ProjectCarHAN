@@ -6,25 +6,20 @@
  */ 
 #include "mode_select.h"
 
-#define READSW1() PINC&~(1 << SW1)
-
-millis_init();
-
-sei();
+#define READSW1() !(PINC & (1 << SW1))
 
 // Initialize switch variables
-bool buttonStateSw1 = 0;
-
-bool lastButtonStateSw1 = 0;
-
+uint8_t buttonStateSw1 = 0;
+uint8_t lastButtonStateSw1 = 0;
 uint8_t switchSelect = 0;
 
 // Initialize timer
 uint8_t debounceDelay = 50;
 uint32_t lastDebounceTime = 0;
 
-void readSwitches() {
-	bool readingSw1 = READSW1();
+void readSwitches(void) 
+{
+	uint8_t readingSw1 = READSW1();
 
 	// Updates lastDebounceTime when change in button state is detected
 	if (readingSw1 != lastButtonStateSw1) {
@@ -48,7 +43,7 @@ void readSwitches() {
 				//stopMode();
 				break;
 				case 1:
-				PORTB ^= (1<<0);
+				PORTB ^= (1 << 4);
 				//manualMode();
 				break;
 				case 2:

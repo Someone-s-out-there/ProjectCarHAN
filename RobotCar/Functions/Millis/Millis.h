@@ -18,6 +18,6 @@ void millis_init(void);
 
 ISR(TIMER0_COMPA_vect);
 
-inline uint32_t millis(void);
+uint32_t millis(void);
 
 #endif /* MILLIS_H_ */

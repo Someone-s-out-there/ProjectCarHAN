@@ -8,24 +8,29 @@
 
 volatile uint32_t ms = 0;
 
+static uint8_t millisEnabled = 0;
+
 void millis_init(void)
 {
-	ms = 0;
-	// Configure Timer/counter 0 to generate an interrupt every millisecond
-	//
-	// - WGM0[2:0] = 010 : waveform generation mode is CTC with TOP in OCR0A
-	// - CS0[2:0] = 011 : 64 prescaler
-	// - TOP : 249
-	//
-	// T_events = T_CPU * N * (TOP + 1)
-	// = 1/16 MHz * 64 * (249 + 1)
-	// = 1 ms
-	TCCR0A |= (1<<WGM01);
-	TCCR0B |= (1<<CS01) | (1<<CS00);
-	OCR0A = 249;
-	
-	// Timer/Counter0 Output Compare Match A Interrupt Enable
-	TIMSK0 |= (1<<OCIE0A);
+	if (!millisEnabled)		// Checks if millis is already initialized
+	{
+		ms = 0;
+		// Configure Timer/counter 0 to generate an interrupt every millisecond
+		//
+		// - WGM0[2:0] = 010 : waveform generation mode is CTC with TOP in OCR0A
+		// - CS0[2:0] = 011 : 64 prescaler
+		// - TOP : 249
+		//
+		// T_events = T_CPU * N * (TOP + 1)
+		// = 1/16 MHz * 64 * (249 + 1)
+		// = 1 ms
+		TCCR0A |= (1<<WGM01);
+		TCCR0B |= (1<<CS01) | (1<<CS00);
+		OCR0A = 249;
+		
+		// Timer/Counter0 Output Compare Match A Interrupt Enable
+		TIMSK0 |= (1<<OCIE0A);
+	}
 }
 
 // Interrupt Service Routine that is automatically executed as soon as

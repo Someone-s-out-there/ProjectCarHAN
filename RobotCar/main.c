@@ -8,10 +8,12 @@
 #include <avr/io.h>
 #include "Functions/Appinfo.h"
 #include "Functions/millis/millis.h"
-#include "Buttons/mode_select.h"
+#include "Functions/Buttons/mode_select.h"
 
 int main(void)
 {
+	registers_init();
+	millis_init();
 	
     while (1) 
     {
