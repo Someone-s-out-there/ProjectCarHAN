@@ -5,10 +5,13 @@
  * Author : Sjoerd
  */
 
+#include "i2c/lcd.h"
 #include <avr/io.h>
 #include <util/delay.h>
 
 int main(void) {
-    while (1) {
-    }
+  lcd1602_init();
+  lcd1602_send_string("hello");
+  while (1) {
+  }
 }
