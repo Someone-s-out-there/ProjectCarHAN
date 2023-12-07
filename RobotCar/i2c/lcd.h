@@ -1,7 +1,7 @@
 
 #ifndef __LCD1602_H__
 #define __LCD1602_H__
-
+#include <stdint.h>
 #define LED_PIN 0
 
 #define LCD_ADDR 0b00100111
@@ -44,5 +44,7 @@ void lcd1602_goto_xy(char col, char row);
  * @str: string
  */
 void lcd1602_send_string(const char *str);
+
+void lcd1602_createChar(uint8_t slot, uint8_t charmap[8]);
 
 #endif
