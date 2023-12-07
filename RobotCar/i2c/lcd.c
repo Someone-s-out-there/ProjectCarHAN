@@ -1,11 +1,25 @@
 #include "lcd.h"
 #include "i2c.h"
+#include <stdint.h>
 #include <util/delay.h>
-
+#define LCD_SETCGRAMADDR 0x40
+#define LCD_REGISTER_SELECT_BIT 0b00000001 // Register select bit
 static struct {
   uint8_t led_pin;
 } lcd;
+// clang-format off
+uint8_t customChars[8][8] = {
+    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 0
+    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 1
+    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 2
+    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 3
+    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 4
+    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 5
+    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 6
+    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}  //char 7
+    };
 
+// clang-format on
 void putnibble(char t) {
   t <<= 4;
   i2c_send_packet(lcd.led_pin |= 0x04, SLA_W);
@@ -20,6 +34,10 @@ void lcd1602_send_byte(char c, char rs) {
   highc = c >> 4;
   if (rs == LCD_COMMAND)
     i2c_send_packet(lcd.led_pin &= ~0x01, SLA_W);
+  // else if (rs == LCD_REGISTER_SELECT_BIT) {
+  //   highc = c >> 4 | LCD_REGISTER_SELECT_BIT;
+  //   i2c_send_packet(lcd.led_pin |= 0x01, SLA_W);
+  // }
   else
     i2c_send_packet(lcd.led_pin |= 0x01, SLA_W);
   putnibble(highc);
@@ -28,8 +46,8 @@ void lcd1602_send_byte(char c, char rs) {
 
 void lcd1602_send_char(char c) {
   char highc = 0;
-
   highc = c >> 4;
+
   i2c_send_packet(lcd.led_pin |= 0x01, SLA_W);
   putnibble(highc);
   putnibble(c);
@@ -55,6 +73,13 @@ void lcd1602_init() {
   _delay_ms(1);
   i2c_send_packet(lcd.led_pin |= 0x08, SLA_W);
   i2c_send_packet(lcd.led_pin &= ~0x02, SLA_W);
+
+  for (uint8_t i = 0; i < 8; i++) {
+    lcd1602_createChar(i, customChars[i]);
+    _delay_ms(1);
+  }
+
+  _delay_ms(10);
 }
 
 void lcd1602_clear() {
@@ -76,18 +101,13 @@ void lcd1602_send_string(const char *str) {
   for (i = 0; str[i] != '\0'; i++)
     lcd1602_send_char(str[i]);
 }
-/*
-#define LCD_SETCGRAMADDR 0x40
-#define LCD_REGISTER_SELECT_BIT 0b00000001 // Register select bit
 
-void lq_createChar(struct LiquidCrystalDevice_t *device, uint8_t slot,
-                   uint8_t charmap[8]) {
+void lcd1602_createChar(uint8_t slot, uint8_t charmap[8]) {
   uint8_t i = 0;
   slot &= 0x7; // we only have 8 locations 0-7
-  lq_sendCommand(device, LCD_SETCGRAMADDR | (slot << 3));
+  lcd1602_send_byte(LCD_SETCGRAMADDR | (slot << 3), LCD_COMMAND);
 
   for (i = 0; i < 8; i++) {
-    lq_writeDeviceByte(device, charmap[i], LCD_REGISTER_SELECT_BIT);
+    lcd1602_send_byte(charmap[i], 1);
   }
 }
-*/

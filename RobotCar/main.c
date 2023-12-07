@@ -13,10 +13,22 @@
 
 int main(void) {
   lcd1602_init();
-  lcd1602_send_string("hello");
-  IO_init();
-  millis_init();
+  //   lcd1602_send_string("str");
+  //   lcd1602_createChar(0, customChar);
+  _delay_ms(1000);
 
+  //   for (uint8_t i = 0; i < 100; i++) {
+  //     lcd1602_send_char(i);
+  //     _delay_ms(1000);
+  //     lcd1602_goto_xy(0, 0);
+  //   }
+  lcd1602_goto_xy(0, 0);
+  for (uint8_t i = 0; i < 8; i++) {
+    lcd1602_send_char(i);
+    _delay_ms(1);
+    IO_init();
+    millis_init();
+  }
   while (1) {
     readSwitches();
   }
