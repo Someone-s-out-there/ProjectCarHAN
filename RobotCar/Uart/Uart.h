@@ -1,10 +1,10 @@
 #ifndef UART_H
 #define UART_H
 
-#include <avr/interrupt.h>
 #include <avr/io.h>
 #include <avr/sfr_defs.h>
 #include <stdint.h>
+
 #include "../DataTypes/FIFO.h"
 
 #ifndef F_CPU
@@ -31,7 +31,6 @@ typedef struct {
 void uart_init(void);
 void uart_puts(const uint8_t *s);
 void uart_set_rxBuffer(RXBuff_t *rxb);
-void uart_set_fifo(fifo_t* fifo);
 
 #endif
 

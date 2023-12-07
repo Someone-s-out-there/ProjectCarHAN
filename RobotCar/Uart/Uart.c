@@ -3,10 +3,8 @@
 #include <stddef.h>
 #include <avr/interrupt.h>
 
-extern volatile uint8_t Charakter;
 static volatile RXBuff_t *rxbuffer_p = NULL;
 static volatile fifo_t *fifobuffer = NULL;
-static volatile uint8_t linecomplete = 0;
 
 /**
  * @brief waits until the uart data register is empty then writes the chData to

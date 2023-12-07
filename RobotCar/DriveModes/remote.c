@@ -1,11 +1,13 @@
 #include "remote.h"
 #include "../Motor/motor.h"
 #include "../Uart/Uart.h"
+#include <string.h>
 #include <util/atomic.h>
-
 volatile uint8_t buffer[UART_BUFFER_SIZE];
+
 volatile RXBuff_t buffy = {
     .buffer = buffer, .buffer_IDX = 0, .linecomplete = 0};
+
 extern MotorDRV motor;
 
 void RemoteControl_Mode(void) {
