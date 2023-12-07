@@ -27,7 +27,7 @@ void readSwitches(void)
 		buttonStateSw1 = 0;
 	}
 
-	// Statement is true when ?time surpasses debounceDelay (50ms)
+	// Statement is true when delta-time surpasses debounceDelay (50ms)
 	if (millis() - lastDebounceTime >= debounceDelay) {
 		if (readingSw1 && !buttonStateSw1) {
 			buttonStateSw1 = readingSw1;
