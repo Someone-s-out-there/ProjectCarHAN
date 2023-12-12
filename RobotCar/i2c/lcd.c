@@ -7,19 +7,32 @@
 static struct {
   uint8_t led_pin;
 } lcd;
-// clang-format off
-uint8_t customChars[8][8] = {
-    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 0
-    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 1
-    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 2
-    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 3
-    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 4
-    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 5
-    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}, //char 6
-    {0b10101, 0b01010, 0b01110, 0b10101, 0b01110, 0b10101, 0b01010, 0b10101}  //char 7
-    };
 
+enum customchars_IDX {
+  batteryRightHigh,
+  batteryRightLow,
+  batteryMiddleHigh,
+  batteryMiddleLow,
+  batteryLeftHigh,
+  batteryLeftLow,
+  play,
+  pause
+};
+
+// clang-format off
+uint8_t customChars[8][8] =
+    {
+        {0b11110, 0b00010, 0b11011, 0b11001, 0b11001, 0b11011, 0b00010, 0b11110}, // char 0 batteryRightHigh
+        {0b11110, 0b00010, 0b00011, 0b00001, 0b00001, 0b00011, 0b00010, 0b11110}, // char 1 batteryRightLow
+        {0b11111, 0b00000, 0b11111, 0b11111, 0b11111, 0b11111, 0b00000, 0b11111}, // char 2 batteryMiddleHigh
+        {0b11111, 0b00000, 0b00000, 0b00000, 0b00000, 0b00000, 0b00000, 0b11111}, // char 3 batteryMiddleLow
+        {0b11111, 0b10000, 0b10111, 0b10111, 0b10111, 0b10111, 0b10000, 0b11111}, // char 4 batteryLeftHigh
+        {0b11111, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b11111}, // char 5 batteryLeftLow
+        {0b00000, 0b11000, 0b11100, 0b11110, 0b11110, 0b11100, 0b11000, 0b00000}, // char 6 play
+        {0b00000, 0b11011, 0b11011, 0b11011, 0b11011, 0b11011, 0b11011, 0b00000}  // char 7 pause
+      };
 // clang-format on
+
 void putnibble(char t) {
   t <<= 4;
   i2c_send_packet(lcd.led_pin |= 0x04, SLA_W);
@@ -34,12 +47,9 @@ void lcd1602_send_byte(char c, char rs) {
   highc = c >> 4;
   if (rs == LCD_COMMAND)
     i2c_send_packet(lcd.led_pin &= ~0x01, SLA_W);
-  // else if (rs == LCD_REGISTER_SELECT_BIT) {
-  //   highc = c >> 4 | LCD_REGISTER_SELECT_BIT;
-  //   i2c_send_packet(lcd.led_pin |= 0x01, SLA_W);
-  // }
   else
     i2c_send_packet(lcd.led_pin |= 0x01, SLA_W);
+
   putnibble(highc);
   putnibble(c);
 }
