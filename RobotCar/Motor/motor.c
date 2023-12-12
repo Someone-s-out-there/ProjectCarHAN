@@ -19,25 +19,31 @@ void setSpeed(int speed) {
 }
 
 void foward(void) {
+	displayDirection(FORWARD);
 #warning "TODO: implement needed"
 }
 
 void backward(void) {
+	displayDirection(BACKWARD);
 #warning "TODO: implement needed"
 }
 
 void left(void) {
+	displayDirection(LEFT);
 #warning "TODO: implement needed"
 }
 
 void right(void) {
+	displayDirection(RIGHT);
 #warning "TODO: implement needed"
 }
 
 void stop(void) {
+	displayDirection(STILL);
 #warning "TODO: implement needed"
 }
 
 void estop(void) {
+	displayDirection(STILL);
 #warning "TODO: implement needed"
 }

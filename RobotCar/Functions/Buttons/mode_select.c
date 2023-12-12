@@ -15,7 +15,7 @@ typedef enum
 	SLAVEMODE,
 	AUTONOMOUSMODE,
 	ERROR
-};
+}modeSwitch_enum;
 
 // Initialize switch variables
 uint8_t buttonStateSw1 = 0;
@@ -49,24 +49,40 @@ void readSwitches(void)
 
 			switch (switchSelect) {
 				case STOPMODE:
-				//stopMode();
-				break;
+					displayMode(STOP);
+					stopMode();
+					break;
+					
 				case MANUALMODE:
-				//manualMode();
-				break;
+					displayMode(MANUAL);
+					manualMode();
+					break;
+					
 				case SLAVEMODE:
-				//slaveMode();
-				break;
+					displayMode(SLAVE);
+					slaveMode();
+					break;
+					
 				case AUTONOMOUSMODE:
-				//autonomousMode();
-				break;
+					displayMode(AUTO);
+					autonomousMode();
+					break;
+					
 				default:
-				//displayMode(0);
-				//stopMode();
-				break;
+					displayMode(0);
+					stopMode();
+					break;
 			}
 		}
 	}
 
 	lastButtonStateSw1 = readingSw1;
+}
+
+void stopMode(void)
+{
+	while (1)
+	{
+		readSwitches();
+	}
 }

@@ -1,6 +1,8 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
+#include "../Display/display.h"
+
 typedef struct {
   void (*setSpeed)(int);
   void (*foward)(void);

@@ -13,6 +13,12 @@
 #include "../Pinmap.h"
 #include "../millis/millis.h"
 
+// Include modes
+#include "../../Modes/autonomous.h"
+#include "../../Modes/manual.h"
+#include "../../Modes/slave.h"
+
 void readSwitches(void);
+void stopMode(void);
 
 #endif /* MODE_SELECT_H_ */
