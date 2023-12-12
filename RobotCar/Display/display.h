@@ -9,7 +9,7 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
-#include <stdio.h>
+#include <stdlib.h>
 #include "../i2c/lcd.h"
 #include "../Functions/millis/millis.h"
 

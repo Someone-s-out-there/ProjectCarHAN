@@ -98,8 +98,8 @@ void displayTimeUsed(uint16_t hours, uint8_t minutes)
 	char hours_str[5];
 	char minutes_str[3];
 	
-	sprintf(hours_str, "%d", hours);
-	sprintf(minutes_str, "%d", minutes);
+	itoa(hours, hours_str, 10);
+	itoa(minutes, minutes_str, 10);
 	
 	lcd1602_goto_xy(0, 1);
 	
