@@ -1,0 +1,466 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "RobotCar.elf"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"add_compile_options",
+			"add_definitions"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 58,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 19,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-mmcu=atmega328p"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-std=c11"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Os"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wextra"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wundef"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wunused-macros"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wnonnull"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wimplicit-fallthrough"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wmisleading-indentation"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wswitch-default"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wunused-parameter"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wshadow"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wparentheses"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wpacked"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wpadded"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Winline"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-pedantic"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wstrict-prototypes"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-Wl,--relax,--gc-sections"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-funsigned-char"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-funsigned-bitfields"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-fpack-struct"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-fshort-enums"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "BAUD="
+				},
+				{
+					"backtrace" : 3,
+					"define" : "F_CPU=16000000UL"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				40,
+				41
+			]
+		}
+	],
+	"id" : "RobotCar::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-mmcu=atmega328p",
+				"role" : "flags"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "RobotCar",
+	"nameOnDisk" : "RobotCar.elf",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				40,
+				41
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/06/9f5737820723c384abf865b0b21460c7eb189c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/0f/9f9cfd5fca594f2fa914fa9f05be7f326f4ddc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/13/18b9964342c73cbf6f811db451daac6863756c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/16/c09c1dd7d86d2fa128c989a8f9ce49d306f6cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/1a/ea9f5f371935134a5a1c4cfb2a29c9f8b8cabc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/1b/18b8ad4e4dfdb9f10971826b57c789cba03bfc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/28/bc07142de9facb89ff2971155828068622692c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/2a/01c25647fa300f4e100debb88ca10c1e3b5b7c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/2f/632fed0cc6981111bad597dafbf71ca08e804c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/33/bcd856eb74f8e104afdd919fa04e6d64b8eefc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/38/2f558444ba3f769b729c0034c532c007fa558c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/44/5797a4182d798b54bd3e6200578feebc506e8c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/44/abdf4a46311aba64b07dff1fe9ffa522aac0cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/46/4bce992bd6a8b71d68471a367ddb8c93927a2c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/49/588c5e36f23cdbe9bb4e477bf45180735aeb5c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/4d/bccc14fb281171d7701a35ac384f9a2cfb498c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/5a/f7105609531b5a2ac24d574f1fc9f2765a69ec",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/67/d170dc95e5427404bd5aef4fea423e526b9dac",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/6c/cbb279f6e81f935fa1dd1b23f03ae3223bbd1c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/6e/000710c89b5270fb2ce54092a3dfbc9b36b8bc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/73/517b1c22924ee0549ae38f1423529ab9d7e7cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/74/4d6ef5be3dbe984f0ec46c30540b6226dc063c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/74/61217559a77fcb3be25a604652f13c48d3cb6c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/74/e34061440d6f465d222754a06841a608bda58c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/7e/7e279ebc42ef918945de517ca3cbe70e8dcc3c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/96/c64b637b42efba68f01e7984ea42fed727e45c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/9a/45c9709a14cc187707c661069c91c71d50dcac",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/a5/c01e05f483cc20b6dcbedc0494b658bf27df5c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/ad/6db2957c97732cfa9a00c3667069398e98bbdc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/ae/97ec24cd4d46564c9a2dd0aa891c16fc2a9fac",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/b3/de468fbeacd65febf4b880685f0f5bc2d1a1cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/b4/1a7868442bc0ae0c7168f6214915279930985c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/b6/1977dcb093c66b93d28775f29b151ea7b1c8bc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/c5/7aa36bdf4c5790e03df1462d9b6fd5f557952c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/cb/1c32df2ad0992fc878dfa8e725638af83c68ec",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/f4/3bc3f65ed19e5d2195dc6d19ae0520fa92f0ac",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/f4/b89710fad5b8dcfae6b567ebf0a4551f16a80c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/f9/3e3a1a1525fb5b91020da86e44810c87a2d7bc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/objects/fb/3b29a14817f1b62197030911c66f9b2ce64c7c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : ".git/rebase-merge/no-reschedule-failed-exec",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "RobotCar/IR_Sensors/IR.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "RobotCar/main.c",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "EXECUTABLE"
+}

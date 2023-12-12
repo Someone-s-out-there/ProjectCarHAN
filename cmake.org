@@ -102,8 +102,6 @@ add_compile_options(
     -funsigned-bitfields
     -fpack-struct
     -fshort-enums
-# optional
-    -fanalyzer
 )
 
 #+end_src
@@ -113,7 +111,10 @@ collects all source files for the project
 ** TODO needs to be turned in to the correct directories and stuff
 #+begin_src cmake
 
-file(GLOB SRC_FILES "src/*.c")
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS "*c")
+file(GLOB_RECURSE REMOVE_CMAKE "build/*" "extern/*" )
+list(REMOVE_ITEM SRC_FILES ${REMOVE_CMAKE})
+include_directories("/home/sjoerd/opt/avr/avr/include")
 
 #+end_src
 
