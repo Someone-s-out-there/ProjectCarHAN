@@ -12,7 +12,7 @@
 
 int main(void)
 {
-	registers_init();
+	IO_init();
 	millis_init();
 	
     while (1) 

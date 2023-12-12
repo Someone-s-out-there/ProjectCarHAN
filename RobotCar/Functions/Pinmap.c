@@ -7,7 +7,7 @@
 
 #include "Pinmap.h"
 
-void registers_init(void)
+void IO_init(void)
 {
 	DDRB |= (OUTPUT << H_LEFT) |
 	(OUTPUT << PWM_LEFT) |

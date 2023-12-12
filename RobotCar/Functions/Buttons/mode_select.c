@@ -6,7 +6,16 @@
  */ 
 #include "mode_select.h"
 
-#define READSW1 !(PINC & (1 << SW1))
+#define READSW1() !(PINC & (1 << SW1))
+
+typedef enum
+{
+	STOPMODE,
+	MANUALMODE,
+	SLAVEMODE,
+	AUTONOMOUSMODE,
+	ERROR
+};
 
 // Initialize switch variables
 uint8_t buttonStateSw1 = 0;
@@ -19,7 +28,7 @@ uint32_t lastDebounceTime = 0;
 
 void readSwitches(void) 
 {
-	uint8_t readingSw1 = READSW1;
+	uint8_t readingSw1 = READSW1();
 
 	// Updates lastDebounceTime when change in button state is detected
 	if (readingSw1 != lastButtonStateSw1) {
@@ -39,16 +48,16 @@ void readSwitches(void)
 			}
 
 			switch (switchSelect) {
-				case 0:
+				case STOPMODE:
 				//stopMode();
 				break;
-				case 1:
+				case MANUALMODE:
 				//manualMode();
 				break;
-				case 2:
+				case SLAVEMODE:
 				//slaveMode();
 				break;
-				case 3:
+				case AUTONOMOUSMODE:
 				//autonomousMode();
 				break;
 				default:

@@ -14,6 +14,8 @@ void millis_init(void)
 {
 	if (!millisEnabled)		// Checks if millis is already initialized
 	{
+		millisEnabled = 1;
+		
 		ms = 0;
 		// Configure Timer/counter 0 to generate an interrupt every millisecond
 		//

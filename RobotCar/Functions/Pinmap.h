@@ -40,6 +40,6 @@ typedef enum
 // Analog input (PC3 nog niet geïnitialiseerd)
 
 // Initialize Registers
-void registers_init(void);
+void IO_init(void);
 
 #endif /* PINMAP_H_ */
