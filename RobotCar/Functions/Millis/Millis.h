@@ -16,7 +16,6 @@
 
 void millis_init(void);
 
-ISR(TIMER0_COMPA_vect);
 
 uint32_t millis(void);
 
