@@ -7,7 +7,6 @@
  */
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
 
 //Robot-auto specific libraries
 #include "Uart/Uart.h"
@@ -21,15 +20,10 @@ int main(void)
 	IO_init();
 	millis_init();
 	initVoltageMonitoring();
-	
 	sei();
-	
-	volatile uint16_t spanning = 0;
+
     while (1) 
     {
-		_delay_ms(1000);
-		readSwitches();
-		spanning = getVoltage();
-		
+		readSwitches();		
     }
 }
