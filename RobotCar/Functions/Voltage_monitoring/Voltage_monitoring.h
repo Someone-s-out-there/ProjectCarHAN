@@ -1,9 +1,10 @@
 /*
- * Voltage_monitoring.h
- *
- * Created: 14-12-2023 09:15:12
- *  Author: Julian Janssen
- */ 
+* Voltage_monitoring.h
+*
+* Created: 14-12-2023 09:15:12
+*  Author: Julian Janssen
+*/
+
 #include <avr/io.h>
 
 #ifndef VOLTAGE_MONITORING_H_
