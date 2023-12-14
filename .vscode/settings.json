@@ -1,6 +1,11 @@
 {
     "files.associations": {
         "io.h": "c",
-        "sfr_defs.h": "c"
+        "sfr_defs.h": "c",
+        "motor.h": "c",
+        "i2c.h": "c",
+        "lcd.h": "c",
+        "twi.h": "c",
+        "stdbool.h": "c"
     }
 }
