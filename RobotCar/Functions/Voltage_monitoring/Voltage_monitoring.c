@@ -4,26 +4,31 @@
  * Created: 14-12-2023 09:15:25
  *  Author: Julian Janssen
  *
- *	(R2/(R1+R2)*v) = otu
- * (1500/(1200+1500))*9 = 5
+ * ===== TEST RESULTS =====
+ * Battery voltage:			7,7 volt
+ * Voltage on divider:		4,01 volt
+ * AVR measure (uint16_t):	398 
+ * AVR measure (REAL):		3,98 volt
  *
  *
  */ 
 #include "Voltage_monitoring.h"
 
-#ifndef  AVR
+// Check if these libraries are present, if not add them
+#ifndef  _AVR_IO_H_
 #include <avr/io.h>
 #endif
 
-#ifndef interrupt
+#ifndef _AVR_INTERRUPT_H_
 #include <avr/interrupt.h>
 #warning "Interrupts not enabled"
 #endif
-volatile uint16_t spanning = 0;
+
+volatile uint16_t potentiometerWaarde = 0;
 
 ISR(ADC_vect)
 {
-	spanning = ADC;
+	potentiometerWaarde = ADC;
 }
 
 void initVoltageMonitoring(void)
@@ -39,11 +44,17 @@ void initVoltageMonitoring(void)
 	ADCSRB = 0;
 }
 
+// GetVoltage() returns the acual voltage with a deviation of 0,05 volts
 uint16_t getVoltage(void)
 {	
-	return map(spanning, 1023, 0, 0, 500); //0 .. 1023
+	// Map the ADC to the battery voltage
+	return map(potentiometerWaarde, 0, 1023, 0, 500);
 }
 
-
-//PC3
-//DDC3
+// A map function to map the correct values to the potentiometer 
+// Note: this function is from arduino: https://www.arduino.cc/reference/en/language/functions/math/map/
+long map(long x, long in_min, long in_max, long out_min, long out_max)
+{
+	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+/* ---------------------------------------------------- End of Voltage_monitoring.c ---------------------------------------------------- */

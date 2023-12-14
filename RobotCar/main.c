@@ -10,7 +10,6 @@
 #include "Functions/Appinfo.h"
 #include "Functions/millis/millis.h"
 #include "Functions/Buttons/mode_select.h"
-
 #include "Functions/Voltage_monitoring/Voltage_monitoring.h"
 
 #include <util/delay.h>
@@ -22,12 +21,12 @@ int main(void)
 	
 	sei();
 	
-	volatile uint16_t sapning=0;
+	volatile uint16_t spanning = 0;
     while (1) 
     {
 		_delay_ms(1000);
 		readSwitches();
-		sapning = getVoltage();
+		spanning = getVoltage();
 		
     }
 }
