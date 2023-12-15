@@ -1,15 +1,15 @@
 /*
-* Voltage_monitoring.c
-*
-* Created: 14-12-2023 09:15:25
-*  Author: Julian Janssen
-*
-* ===== TEST RESULTS =====
-* Battery voltage:			7,7 volt
-* Voltage on divider:		4,01 volt
-* AVR measure (uint16_t):	398
-* AVR measure (REAL):		3,98 volt
-*/
+ * Voltage_monitoring.c
+ *
+ * Created: 14-12-2023 09:15:25
+ *  Author: Julian Janssen
+ *
+ * ===== TEST RESULTS =====
+ * Battery voltage:	        7,7 volt
+ * Voltage on divider:		4,01 volt
+ * AVR measure (uint16_t):	398
+ * AVR measure (REAL):		3,98 volt
+ */
 #include "Voltage_monitoring.h"
 
 // Check if these libraries are present, if not add them
@@ -32,7 +32,9 @@
 
 // uint16_t variable to store the analog converted value
 volatile uint16_t ADC_Waarde = 0;
-
+/*
+ * Initialize the ADC and start the voltage monitoring
+ */
 void initVoltageMonitoring(void)
 {
 	// Initialize the ADC peripheral
@@ -45,8 +47,9 @@ void initVoltageMonitoring(void)
 	// Set ADC in freerunning mode
 	ADCSRB = 0;
 }
-
-// GetVoltage() returns the acual voltage with a deviation of 0,05 volts
+/*
+ * GetVoltage() returns the acual voltage with a deviation of 0,05 volts
+ */
 uint16_t getVoltage(void)
 {
 	// Map the ADC to the battery voltage
@@ -54,8 +57,10 @@ uint16_t getVoltage(void)
 	return map(ADC_Waarde, MIN_ADC_VAL, MAX_ADC_VAL, MIN_VOLTAGE_VAL, MAX_VOLTAGE_VAL);
 }
 
-// A map function to map the correct values to the potentiometer
-// Note: this function is from arduino: https://www.arduino.cc/reference/en/language/functions/math/map/
+/*
+ * A map function to map the correct values to the potentiometer
+ * Note: this function is from arduino: https://www.arduino.cc/reference/en/language/functions/math/map/
+ */
 long map(long x, long in_min, long in_max, long out_min, long out_max)
 {
 	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
