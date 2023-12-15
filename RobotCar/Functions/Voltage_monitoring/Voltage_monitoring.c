@@ -33,12 +33,6 @@
 // uint16_t variable to store the analog converted value
 volatile uint16_t ADC_Waarde = 0;
 
-ISR(ADC_vect)
-{
-	// Save ADC value
-	ADC_Waarde = ADC;
-}
-
 void initVoltageMonitoring(void)
 {
 	// Initialize the ADC peripheral
@@ -65,5 +59,11 @@ uint16_t getVoltage(void)
 long map(long x, long in_min, long in_max, long out_min, long out_max)
 {
 	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+ISR(ADC_vect)
+{
+	// Save ADC value
+	ADC_Waarde = ADC;
 }
 /* ---------------------------------------------------- End of Voltage_monitoring.c ---------------------------------------------------- */
