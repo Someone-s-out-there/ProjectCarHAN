@@ -1,0 +1,17 @@
+{
+    "name": "ProjectCarHAN",
+    "todos": [
+        {
+            "done": false,
+            "title": "modify uart lib"
+        },
+        {
+            "done": false,
+            "title": "mod uart fifo"
+        },
+        {
+            "done": false,
+            "title": "mod uart char*"
+        }
+    ]
+}

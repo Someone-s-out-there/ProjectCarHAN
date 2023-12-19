@@ -1,13 +1,16 @@
 #include "Uart.h"
 
-extern volatile uint8_t Charakter;
+#include <stddef.h>
+#include <avr/interrupt.h>
+
 static volatile RXBuff_t *rxbuffer_p = NULL;
+static volatile fifo_t *fifobuffer = NULL;
 
 /**
  * @brief waits until the uart data register is empty then writes the chData to
  * the register
  */
-void uart_putc(uint8_t chData) {
+void uart_putc(const uint8_t chData) {
   loop_until_bit_is_set(UCSR0A, UDRE0);
   //   while ((UCSR0A & (1 << UDRE0)) == 0);
   UDR0 = chData;
@@ -31,7 +34,7 @@ void uart_init(void) {
  * @brief loops over a passed in string pointer for each byte it calls @ref
  * uart_putc
  */
-void uart_puts(uint8_t *s) {
+void uart_puts(const uint8_t *s) {
   while (*s) {
     uart_putc(*s);
     s++;
@@ -68,7 +71,8 @@ ISR(USART_RX_vect) {
     return;
   }
   PORTB ^= (1 << PINB5);
-  uint8_t c = UDR0;
+  const uint8_t c = UDR0;
+
   rxbuffer_p->buffer[rxbuffer_p->buffer_IDX] = c;
 
   if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
