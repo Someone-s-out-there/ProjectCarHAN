@@ -19,7 +19,7 @@ int main(void) {
   /* Replace with your application code */
   while (1) {
       uint8_t tmp[2] = {0, 0};
-      tmp[0] = ultrasonic_get_distance();
+      tmp[0] = ultrasonic_Start_Measurement(US_left);
       uart_puts(tmp);
   }
   while (1) {
