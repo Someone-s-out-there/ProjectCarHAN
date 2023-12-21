@@ -20,10 +20,10 @@
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress />
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
     <UncachedRange />
     <preserveEEPROM>true</preserveEEPROM>
-    <OverrideVtorValue />
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
     <eraseonlaunchrule>0</eraseonlaunchrule>
@@ -107,7 +107,7 @@
   <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
   <avrgcc.compiler.warnings.ExtraWarnings>True</avrgcc.compiler.warnings.ExtraWarnings>
   <avrgcc.compiler.warnings.Pedantic>True</avrgcc.compiler.warnings.Pedantic>
-  <avrgcc.compiler.miscellaneous.OtherFlags>-std=c11 -Wundef -Wundef -Wunused-macros -Wnonnull -Wimplicit-fallthrough -Wmisleading-indentation -Wswitch-default -Wunused-parameter -Wshadow -Wparentheses -Wpacked -Wpadded -Winline -pedantic -Wstrict-prototypes -Wl,--relax,--gc-sections -funsigned-char # a few optimizations -funsigned-bitfields -fpack-struct -fshort-enums</avrgcc.compiler.miscellaneous.OtherFlags>
+  <avrgcc.compiler.miscellaneous.OtherFlags />
   <avrgcc.linker.libraries.Libraries>
     <ListValues>
       <Value>libm</Value>
@@ -123,9 +123,29 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IR_Sensors\IR.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="IR_Sensors\IR.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Motor\motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Motor\motor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Uart\Uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IR_Sensors\" />
+    <Folder Include="Motor\" />
+    <Folder Include="Uart\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
