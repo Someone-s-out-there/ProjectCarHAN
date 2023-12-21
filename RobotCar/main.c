@@ -12,6 +12,8 @@
 
 int main(void) 
 {
+	motor_init();
+	
 	while (1)
 	 {
 
