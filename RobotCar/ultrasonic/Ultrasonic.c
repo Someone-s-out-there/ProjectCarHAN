@@ -15,7 +15,7 @@ static void Example_callback(uint8_t *ovf_Count);
 
 #define StopTMR2() TCCR2B &= ~0x03
 #define StartTMR2() TCCR2B |= 0x03
-#define SOUND_SPEED 34300 // snelheid van geluid in cm/s
+
 static volatile uint8_t overflowcount = 0;
 static bool running = false;
 
@@ -35,6 +35,19 @@ static void Example_callback(uint8_t *ovf_Count) {
     *ovf_Count = 0;
     TCNT2 = 0;
     measurement_complete = true;
+}
+
+__attribute__((unused)) static int example_main(void) {
+    //init allthings
+    ultrasonic_set_callback(&Example_callback);
+    while (1) {
+        if (measurement_complete) {
+            //handle the new measure ment
+        }
+        //do the normal shit
+
+    }
+
 }
 //example callback end
 
