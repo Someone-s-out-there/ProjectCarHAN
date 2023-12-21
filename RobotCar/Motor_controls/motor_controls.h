@@ -9,7 +9,7 @@
 #define MOTOR_CONTROLS_H
 
 typedef struct {
-  void (*setSpeed)(int);
+  void (*setSpeed)(uint16_t);
   void (*foward)(void);
   void (*backward)(void);
   void (*left)(void);

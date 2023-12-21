@@ -8,12 +8,12 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include "Motor_controls/motor_controls.h"
 
-uint8_t Charakter = 0;
+int main(void) 
+{
+	while (1)
+	 {
 
-int main(void) {
-
-	while (1) {
-
-		}
+	}
 }
