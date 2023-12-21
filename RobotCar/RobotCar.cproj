@@ -132,20 +132,16 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Motor\motor.c">
+    <Compile Include="Motor_controls\Motor_controls.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Motor\motor.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Uart\Uart.c">
+    <Compile Include="Motor_controls\Motor_controls.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IR_Sensors\" />
-    <Folder Include="Motor\" />
-    <Folder Include="Uart\" />
+    <Folder Include="Motor_controls" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

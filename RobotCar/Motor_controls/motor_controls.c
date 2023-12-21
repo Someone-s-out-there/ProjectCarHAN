@@ -1,9 +1,23 @@
-#include "motor.h"
+/*
+* Motor_controls.c
+*
+* Created: 21-12-2023 10:44:29
+*  Author: Julian Janssen
+*/
+#include "motor_controls.h"
 #include <stdint.h>
 
 MotorDRV motor;
 
-void other() { motor.backward(); }
+void setSpeed(int speed);
+void foward(void);
+void backward(void);
+void left(void);
+void right(void);
+void stop(void);
+void estop(void);
+
+//void other() { motor.backward(); }
 
 void motor_init(MotorDRV *m) {
   m->setSpeed = &setSpeed;

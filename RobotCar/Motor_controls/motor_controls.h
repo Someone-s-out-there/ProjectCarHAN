@@ -1,5 +1,12 @@
-#ifndef MOTOR_H
-#define MOTOR_H
+/*
+* Motor_controls.h
+*
+* Created: 21-12-2023 10:44:29
+*  Author: Julian Janssen
+*/
+
+#ifndef MOTOR_CONTROLS_H
+#define MOTOR_CONTROLS_H
 
 typedef struct {
   void (*setSpeed)(int);
