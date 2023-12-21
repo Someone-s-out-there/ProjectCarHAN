@@ -3,8 +3,7 @@
  *
  * Created: 4-12-2023 17:11:45
  *  Author: ayman
- */ 
-
+ */
 
 #ifndef ULTRASONIC_HEADER_FILE_H_
 #define ULTRASONIC_HEADER_FILE_H_
@@ -17,6 +16,5 @@
 void ultrasonic_init();
 
 uint8_t ultrasonic_get_distance();
-
 
 #endif /* ULTRASONIC_HEADER_FILE_H_ */
