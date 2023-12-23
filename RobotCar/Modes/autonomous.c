@@ -7,14 +7,18 @@
 
 #include "autonomous.h"
 
+extern uint8_t switchSelect;
+
 void autonomousMode(void)
 {
-	while (1)
+	while (switchSelect == 3)
 	{
 		updateUserTime();
 		displayBattery(100);
 		displaySpeed(0);
 		
-		readSwitches();
+		//readSwitches();
 	}
+	
+	return;
 }

@@ -10,15 +10,9 @@
 #define MODE_SELECT_H_
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include "../Pinmap.h"
-#include "../millis/millis.h"
 
-// Include modes
-#include "../../Modes/autonomous.h"
-#include "../../Modes/manual.h"
-#include "../../Modes/slave.h"
-
-void readSwitches(void);
-void stopMode(void);
+void button_init(void);
 
 #endif /* MODE_SELECT_H_ */

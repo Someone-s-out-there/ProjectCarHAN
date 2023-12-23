@@ -7,14 +7,18 @@
 
 #include "slave.h"
 
+extern uint8_t switchSelect;
+
 void slaveMode(void)
 {
-	while (1)
+	while (switchSelect == 2)
 	{
 		updateUserTime();
 		displayBattery(100);
 		displaySpeed(0);
 		
-		readSwitches();
+		//readSwitches();
 	}
+	
+	return;
 }

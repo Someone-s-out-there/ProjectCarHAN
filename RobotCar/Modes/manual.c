@@ -7,14 +7,18 @@
 
 #include "manual.h"
 
+extern uint8_t switchSelect;
+
 void manualMode(void)
 {
-	while (1)
+	while (switchSelect == 1)
 	{
 		updateUserTime();
 		displayBattery(100);
 		displaySpeed(0);
 		
-		readSwitches();
+		//readSwitches();
 	}
+	
+	return;
 }
