@@ -15,6 +15,8 @@ uint8_t display_speed = 0;
 uint8_t speedWillShow = 0;
 uint8_t speedUpdate = 0;
 
+extern uint8_t batteryPercentage;
+
 void displayMode(char mode)
 {
 	display_speed = 0;
@@ -144,9 +146,18 @@ void displayDirection(char direction)
 	}
 }
 
-void displayBattery(uint8_t batteryPercentage)
+// Variables for the flashing when battery is below 20%
+uint32_t previousBatteryMillis = 0;
+uint16_t intervalBattery = 500;
+uint8_t batteryFlashingState = 0;
+
+void displayBattery()
 {
-	if (batteryPercentage > 75)
+	updateBatteryPercentage();
+	
+	uint32_t currentBatteryMillis = millis();
+	
+	if (batteryPercentage > 80)
 	{
 		lcd1602_goto_xy(12, 1);
 		lcd1602_send_char(4);
@@ -155,7 +166,7 @@ void displayBattery(uint8_t batteryPercentage)
 		lcd1602_send_char(0);
 	}
 	
-	else if (batteryPercentage > 50)
+	else if (batteryPercentage > 60)
 	{
 		lcd1602_goto_xy(12, 1);
 		lcd1602_send_char(4);
@@ -164,7 +175,7 @@ void displayBattery(uint8_t batteryPercentage)
 		lcd1602_send_char(1);
 	}
 	
-	else if (batteryPercentage > 25)
+	else if (batteryPercentage > 40)
 	{
 		lcd1602_goto_xy(12, 1);
 		lcd1602_send_char(4);
@@ -173,12 +184,34 @@ void displayBattery(uint8_t batteryPercentage)
 		lcd1602_send_char(1);
 	}
 	
-	else
+	else if (batteryPercentage > 20)
 	{
 		lcd1602_goto_xy(12, 1);
 		lcd1602_send_char(4);
 		lcd1602_send_char(3);
 		lcd1602_send_char(3);
 		lcd1602_send_char(1);
+	}
+	
+	else if (currentBatteryMillis - previousBatteryMillis >= intervalBattery)
+	{
+		previousBatteryMillis = currentBatteryMillis;
+		
+		if (batteryFlashingState)
+		{
+			lcd1602_goto_xy(12, 1);
+			lcd1602_send_char(5);
+			lcd1602_send_char(3);
+			lcd1602_send_char(3);
+			lcd1602_send_char(1);
+			
+			batteryFlashingState = 0;
+		}else
+		{
+			lcd1602_goto_xy(12, 1);
+			lcd1602_send_string("    ");
+			
+			batteryFlashingState = 1;
+		}
 	}
 }

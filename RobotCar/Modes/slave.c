@@ -13,11 +13,13 @@ void slaveMode(void)
 {
 	while (switchSelect == 2)
 	{
+		/*--------DISPLAY--------*/
 		updateUserTime();
-		displayBattery(100);
-		displaySpeed(0);
+		displayBattery();
+		displaySpeed(0); // Not implemented (yet)
+		/*-----------------------*/
 		
-		//readSwitches();
+		// Put code for slave mode here
 	}
 	
 	return;

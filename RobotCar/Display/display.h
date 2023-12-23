@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include "../i2c/lcd.h"
 #include "../Functions/millis/millis.h"
+#include "../Functions/Voltage_monitoring/Voltage_monitoring.h"
 
 typedef enum
 {
@@ -34,6 +35,6 @@ void displayMode(char mode);
 void displaySpeed(float speed);
 void displayTimeUsed(uint16_t hours, uint8_t minutes);
 void displayDirection(char direction);
-void displayBattery(uint8_t batteryPercentage);
+void displayBattery();
 
 #endif /* DISPLAY_H_ */

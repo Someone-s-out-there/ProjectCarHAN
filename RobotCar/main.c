@@ -34,18 +34,21 @@ int main(void)
 	IO_init();
 	millis_init();
 	button_init();
+	voltageMonitoring_init();
 	
-	// Display
+	// Display setup
+	lcd1602_clear();
 	getUserTime();
 	displayDirection(STILL);
 	displayMode(STOP);
   
 	while (1)
 	{
+		/*--------DISPLAY--------*/
 		updateUserTime();
-		displayBattery(100);
-		displaySpeed(0);
-		//readSwitches();
+		displayBattery();
+		displaySpeed(0); // Not implemented (yet)
+		/*-----------------------*/
 		
 		switch (switchSelect) {
 			case STOPMODE:
@@ -80,7 +83,11 @@ void stopMode(void)
 {
 	while (switchSelect == 0)
 	{
+		/*--------DISPLAY--------*/
 		updateUserTime();
-		displayBattery(100);
+		displayBattery();
+		/*-----------------------*/
+		
+		// Put code for stop mode here
 	}
 }

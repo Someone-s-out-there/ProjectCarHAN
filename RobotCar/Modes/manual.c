@@ -13,11 +13,13 @@ void manualMode(void)
 {
 	while (switchSelect == 1)
 	{
+		/*--------DISPLAY--------*/
 		updateUserTime();
-		displayBattery(100);
-		displaySpeed(0);
+		displayBattery();
+		displaySpeed(0); // Not implemented (yet)
+		/*-----------------------*/
 		
-		//readSwitches();
+		// Put code for manual mode here
 	}
 	
 	return;

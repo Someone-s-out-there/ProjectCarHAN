@@ -13,11 +13,13 @@ void autonomousMode(void)
 {
 	while (switchSelect == 3)
 	{
+		/*--------DISPLAY--------*/
 		updateUserTime();
-		displayBattery(100);
-		displaySpeed(0);
+		displayBattery();
+		displaySpeed(0); // Not implemented (yet)
+		/*-----------------------*/
 		
-		//readSwitches();
+		// Put code for autonomous mode here
 	}
 	
 	return;
