@@ -18,6 +18,7 @@ typedef struct {
   void (*estop)(void);
 } MotorDRV;
 
+void testIets();
 void motor_init(MotorDRV *m);
 
 #endif
