@@ -18,7 +18,7 @@
 static volatile uint8_t overflowcount = 0;
 static bool running = false;
 
-#define RISINGEDGE (PIND & (1<<PD7))
+#define RISINGEDGE() (PIND & (1<<PD7))
 
 
 
@@ -37,12 +37,12 @@ static void Example_callback(uint8_t *ovf_Count) {
 }
 
 __attribute__((unused)) static int example_main(void) {
-    //init allthings
+    //init all things
     ultrasonic_set_callback(&Example_callback);
     ultrasonic_Start_Measurement(US_left);
     while (1) {
         if (measurement_complete) {
-            //handle the new measure ment
+            //handle the new measurement
             ultrasonic_Start_Measurement(US_left);
 
         }
@@ -108,6 +108,8 @@ int8_t ultrasonic_Start_Measurement(enum Ultrasoon_sensors US) {
         default:
             return -1;
     }
+
+
 
 
     running = true;
