@@ -1,0 +1,11 @@
+@startuml
+Main -> LED : IO_init(void)
+LED --> Main : void
+
+Main -> LED : LED_left_on(void)
+LED --> Main : void
+
+Main -> LED : LED_right_on(void)
+LED --> Main : void
+
+@enduml

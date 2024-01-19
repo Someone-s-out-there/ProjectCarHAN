@@ -1,0 +1,23 @@
+@startuml communication
+
+Main ->  UART: uart_init(void)
+UART --> Main: void
+
+Main ->  UART: uart_puts(const char *s)
+UART -> Remote: ascii characters
+UART --> Main: void
+
+
+Main -> UART: uart_set_rxBuffer(RXBuff_t *rxb)
+UART --> Main: void
+
+Terminal -> Remote: Write_chars(char* s) 
+Remote -> UART: ascii characters
+Remote --> Terminal: bool 
+
+UART -> UART: ISR(USART_RX_vect)
+Main -> Main: RXBuff_T->\nlinecomplete == 0
+
+
+
+@enduml

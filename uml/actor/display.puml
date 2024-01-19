@@ -1,0 +1,22 @@
+@startuml
+ Main -> LCD : lcd1602_init(void)
+ LCD --> Main : void
+
+ Main -> LCD : lcd1602_create_char(uint8_t slot, uint8_t charmap[8])
+ LCD --> Main : void
+
+ Main -> LCD : lcd1602_goto_xy(char col, char row)
+ LCD --> Main : void
+
+ Main -> LCD : lcd1602_clear(void)
+ LCD --> Main : void
+
+ Main -> LCD : lcd1602_send_string(const char *str)
+ LCD --> Main : void
+
+ Main -> LCD : lcd1602_send_string(char c) 
+ note right : sending a char in the range 0->7 will use one of the defined custom characters
+ LCD --> Main : void
+
+
+@enduml
