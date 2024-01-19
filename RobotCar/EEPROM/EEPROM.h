@@ -10,10 +10,16 @@
 #define EEPROM_H_
 
 #include <avr/io.h>
+#include <avr/eeprom.h>
 
-uint8_t EEPROM_read(uint16_t adress);
-void EEPROM_write(uint16_t adress, uint8_t value);
-void EEPROM_update(uint16_t adress, uint8_t value);
+struct eepromClass{
+	uint8_t (*read)(uint16_t adress);
+	void (*write)(uint16_t adress, uint8_t value);
+	void (*update)(uint16_t adress, uint8_t value);
+	void (*setAll)(uint8_t setValue);
+	uint16_t (*length)(void);
+};
 
+struct eepromClass EEPROM;
 
 #endif /* EEPROM_H_ */

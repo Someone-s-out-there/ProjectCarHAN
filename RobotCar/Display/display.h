@@ -21,7 +21,7 @@ typedef enum
 	BACKWARD = 'b',
 	LEFT = 'l',
 	RIGHT = 'r'
-}motorDirection;
+}direction_t;
 
 typedef enum
 {
@@ -29,12 +29,12 @@ typedef enum
 	MANUAL = 'm',
 	SLAVE = 's',
 	AUTO = 'a',
-}modes_enum;
+}mode_t;
 
-void displayMode(char mode);
+void displayMode(mode_t mode);
 void displaySpeed(float speed);
 void displayTimeUsed(uint16_t hours, uint8_t minutes);
-void displayDirection(char direction);
-void displayBattery();
+void displayDirection(direction_t direction);
+void displayBattery(void);
 
 #endif /* DISPLAY_H_ */

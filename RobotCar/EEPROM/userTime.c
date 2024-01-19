@@ -22,7 +22,7 @@ void getUserTime(void)
 	while(1)
 	{
 		// Reads the byte
-		EEPROMByteValue = EEPROM_read(EEPROMByteNumber);
+		EEPROMByteValue = EEPROM.read(EEPROMByteNumber);
 		// Adds the value of the current byte to the total EEPROM value
 		EEPROMValue += EEPROMByteValue;
 		// If the value of a byte is 255, EEPROMByteNumber is increased by one and the loop starts over
@@ -46,7 +46,8 @@ void updateUserTime(void)
 	}
 		
 	uint32_t currentMillis = millis();
-		
+	
+	// Updates EEPROM when time has surpassed
 	if (currentMillis - previousMillisTime >= intervalTime)
 	{
 		previousMillisTime = currentMillis;
@@ -54,7 +55,7 @@ void updateUserTime(void)
 		EEPROMValue++;
 			
 		EEPROMByteValue++;
-		EEPROM_update(EEPROMByteNumber, EEPROMByteValue);
+		EEPROM.update(EEPROMByteNumber, EEPROMByteValue);
 			
 		if (EEPROMByteValue == 255)
 		{

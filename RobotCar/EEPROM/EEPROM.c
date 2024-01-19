@@ -7,7 +7,7 @@
 
 #include "EEPROM.h"
 
-uint8_t EEPROM_read(uint16_t adress)
+static uint8_t eeprom_read(uint16_t adress)
 {
 	// Wait for previous write to finish
 	while(EECR & (1 << EEPE));
@@ -23,7 +23,7 @@ uint8_t EEPROM_read(uint16_t adress)
 	return data;
 }
 
-void EEPROM_write(uint16_t adress, uint8_t value)
+static void eeprom_write(uint16_t adress, uint8_t value)
 {
 	// Wait for previous write to finish
 	while(EECR & (1 << EEPE));
@@ -41,13 +41,30 @@ void EEPROM_write(uint16_t adress, uint8_t value)
 	EECR |= (1 << EEPE);
 }
 
-void EEPROM_update(uint16_t adress, uint8_t value)
+static void eeprom_update(uint16_t adress, uint8_t value)
 {
 	// Wait for previous write to finish
 	while(EECR & (1 << EEPE));
 	
-	if (EEPROM_read(adress) != value)
+	if (eeprom_read(adress) != value)
 	{
-		EEPROM_write(adress, value);
+		eeprom_write(adress, value);
 	}
 }
+
+static uint16_t eeprom_length(void) {return E2END + 1;}
+
+// Sets all bytes of the EEPROM to setValue
+static void eeprom_setAll(uint8_t setValue){
+	for (uint16_t i = 0; i < eeprom_length(); i++){
+		eeprom_update(i, setValue);
+	}
+}
+	
+struct eepromClass EEPROM = {
+	.read = eeprom_read,
+	.write = eeprom_write,
+	.update = eeprom_update,
+	.length = eeprom_length,
+	.setAll = eeprom_setAll
+};

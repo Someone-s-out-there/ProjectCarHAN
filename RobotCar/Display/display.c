@@ -17,14 +17,14 @@ uint8_t speedUpdate = 0;
 
 extern uint8_t batteryPercentage;
 
-void displayMode(char mode)
+void displayMode(mode_t mode)
 {
 	display_speed = 0;
 	previousModeMillis = millis();
 
 	switch (mode)
 	{
-		case 'm':
+		case MANUAL:
 			lcd1602_goto_xy(0, 0);
 			lcd1602_send_char(6);
 			lcd1602_send_string("Manual   ");
@@ -33,7 +33,7 @@ void displayMode(char mode)
 			speedUpdate = 1;
 			break;
 		
-		case 's':
+		case SLAVE:
 			lcd1602_goto_xy(0, 0);
 			lcd1602_send_char(6);
 			lcd1602_send_string("Slave    ");
@@ -42,7 +42,7 @@ void displayMode(char mode)
 			speedUpdate = 1;
 			break;
 		
-		case 'a':
+		case AUTO:
 			lcd1602_goto_xy(0, 0);
 			lcd1602_send_char(6);
 			lcd1602_send_string("Auto     ");
@@ -50,7 +50,7 @@ void displayMode(char mode)
 			speedWillShow = 1;
 			speedUpdate = 1;
 			break;
-		case '-':
+		case STOP:
 			lcd1602_goto_xy(0, 0);
 			lcd1602_send_char(7);
 			lcd1602_send_string("         ");
@@ -115,27 +115,27 @@ void displayTimeUsed(uint16_t hours, uint8_t minutes)
 	lcd1602_send_string("m");
 }
 
-void displayDirection(char direction)
+void displayDirection(direction_t direction)
 {
 	switch(direction)
 	{
-		case 's':
+		case STILL:
 		lcd1602_goto_xy(8, 0);
 		lcd1602_send_string("   STILL");
 		break;
-		case 'f':
+		case FORWARD:
 		lcd1602_goto_xy(8, 0);
 		lcd1602_send_string(" FORWARD");
 		break;
-		case 'b':
+		case BACKWARD:
 		lcd1602_goto_xy(8, 0);
 		lcd1602_send_string("BACKWARD");
 		break;
-		case 'l':
+		case LEFT:
 		lcd1602_goto_xy(8, 0);
 		lcd1602_send_string("    LEFT");
 		break;
-		case 'r':
+		case RIGHT:
 		lcd1602_goto_xy(8, 0);
 		lcd1602_send_string("   RIGHT");
 		break;
@@ -151,7 +151,7 @@ uint32_t previousBatteryMillis = 0;
 uint16_t intervalBattery = 500;
 uint8_t batteryFlashingState = 0;
 
-void displayBattery()
+void displayBattery(void)
 {
 	updateBatteryPercentage();
 	

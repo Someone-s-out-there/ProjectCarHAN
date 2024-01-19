@@ -26,11 +26,12 @@
 #define MAX_ADC_VAL 1023
 #define MIN_ADC_VAL 0
 
-// Value in HUNDERDs otherwise we need to use floats
+// Min/max rated voltage
 #define MAX_VOLTAGE_VAL 500
 #define MIN_VOLTAGE_VAL 0
 
-// Safe operating voltage range (needs tweaking)
+// Safe operating voltage range in hundreds (needs tweaking)
+// 
 #define MAX_OPERATING_VOLTAGE 492
 #define MIN_OPERATING_VOLTAGE 399
 
@@ -51,7 +52,7 @@ void voltageMonitoring_init(void)
 	// ADC Control and Status Register A
 	ADCSRA = 0b11111111;
 	
-	// Set ADC in freerunning mode
+	// Set ADC in free running mode
 	ADCSRB = 0;
 }
 /*
@@ -68,6 +69,7 @@ void updateBatteryPercentage(void)
 {
 	uint16_t voltage = getVoltage();
 	
+	// Takes care of the value when below or above the operating interval
 	if (voltage < MIN_OPERATING_VOLTAGE)
 	{
 		batteryPercentage = 0;
