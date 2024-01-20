@@ -9,9 +9,9 @@
 #ifndef MODE_SELECT_H_
 #define MODE_SELECT_H_
 
-#include <avr/io.h>
+#include "../Millis/Millis.h"
 #include "../Pinmap.h"
-#include "../millis/millis.h"
+#include <avr/io.h>
 
 void readSwitches(void);
 

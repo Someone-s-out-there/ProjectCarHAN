@@ -6,6 +6,8 @@
         "i2c.h": "c",
         "lcd.h": "c",
         "twi.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "mode_select.h": "c",
+        "millis.h": "c"
     }
 }
