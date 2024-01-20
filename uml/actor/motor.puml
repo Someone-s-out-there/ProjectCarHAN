@@ -1,0 +1,30 @@
+@startuml
+
+Main -> Motor: motor_init(MotorDRV *m)
+note right : MotorDRV is a structure with 7 function pointers\n these are initialized in motor_init and are acessed through the structure
+
+Motor --> Main : void
+
+Main -> Motor: m->setSpeed(int speed)
+Motor --> Main : void
+
+Main -> Motor: m->foward(void)
+Motor --> Main : void
+Main -> Motor: m->backward(void)
+Motor --> Main : void
+
+Main -> Motor: m->left(void)
+Motor --> Main : void
+
+Main -> Motor: m->right(void)
+Motor --> Main : void
+
+Main -> Motor: m->stop(void)
+Motor --> Main : void
+
+Main -> Motor: m->estop(void)
+Motor --> Main : void
+
+
+
+@enduml

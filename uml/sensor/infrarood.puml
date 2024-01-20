@@ -1,0 +1,10 @@
+@startuml
+
+Main -> IR_driver : IR_init(void)
+IR_driver -> Main : void
+
+
+Main -> IR_driver : IR_getSensors(void)
+IR_driver -> Main : IR_bits_t
+
+@enduml

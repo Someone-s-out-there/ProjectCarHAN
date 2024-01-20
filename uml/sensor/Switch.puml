@@ -1,0 +1,11 @@
+@startuml
+
+Main ->  IO : IO_init(void)
+IO --> Main : void
+
+Main ->  IO : readSwiches(void)
+IO --> Main : void
+
+
+
+@enduml  

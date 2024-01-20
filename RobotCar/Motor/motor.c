@@ -1,43 +1,55 @@
 #include "motor.h"
+
+#include <avr/io.h>
 #include <stdint.h>
+#include <util/delay.h>
 
 MotorDRV motor;
 
 void motor_init(MotorDRV *m) {
-  m->setSpeed = &setSpeed;
-  m->foward = &foward;
-  m->backward = &backward;
-  m->left = &left;
-  m->right = &right;
-  m->stop = stop;
-  m->estop = &estop;
+    m->setSpeed = &setSpeed;
+    m->foward = &foward;
+    m->backward = &backward;
+    m->left = &left;
+    m->right = &right;
+    m->stop = stop;
+    m->estop = &estop;
 }
 
-void setSpeed(int speed) {
-  static uint8_t currentspeed;
-#warning "TODO: implement needed"
-}
+void setSpeed(int speed) { static uint8_t currentspeed; }
 
 void foward(void) {
-#warning "TODO: implement needed"
+    PORTB |= (1 << PORTB5);
+    _delay_ms(100);
+    PORTB &= ~(1 << PORTB5);
 }
 
 void backward(void) {
-#warning "TODO: implement needed"
+    PORTB |= (1 << PORTB5);
+    _delay_ms(100);
+    PORTB &= ~(1 << PORTB5);
 }
 
 void left(void) {
-#warning "TODO: implement needed"
+    PORTB |= (1 << PORTB5);
+    _delay_ms(100);
+    PORTB &= ~(1 << PORTB5);
 }
 
 void right(void) {
-#warning "TODO: implement needed"
+    PORTB |= (1 << PORTB5);
+    _delay_ms(100);
+    PORTB &= ~(1 << PORTB5);
 }
 
 void stop(void) {
-#warning "TODO: implement needed"
+    PORTB |= (1 << PORTB5);
+    _delay_ms(100);
+    PORTB &= ~(1 << PORTB5);
 }
 
 void estop(void) {
-#warning "TODO: implement needed"
+    PORTB |= (1 << PORTB5);
+    _delay_ms(100);
+    PORTB &= ~(1 << PORTB5);
 }

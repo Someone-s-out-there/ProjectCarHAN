@@ -1,0 +1,11 @@
+@startuml
+participant Main as Main
+participant Ultrasoonsensor as us
+
+Main -> us  : ultrasonic_init(void)
+us --> Main : void
+
+Main -> us : ultrasonic_get_distance(void)
+us --> Main : uint8_t
+
+@enduml

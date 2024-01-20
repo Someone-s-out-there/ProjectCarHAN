@@ -1,7 +1,7 @@
 #include "Uart.h"
 
-#include <stddef.h>
 #include <avr/interrupt.h>
+#include <stddef.h>
 
 static volatile RXBuff_t *rxbuffer_p = NULL;
 static volatile fifo_t *fifobuffer = NULL;
@@ -11,23 +11,23 @@ static volatile fifo_t *fifobuffer = NULL;
  * the register
  */
 void uart_putc(const uint8_t chData) {
-  loop_until_bit_is_set(UCSR0A, UDRE0);
-  //   while ((UCSR0A & (1 << UDRE0)) == 0);
-  UDR0 = chData;
+    loop_until_bit_is_set(UCSR0A, UDRE0);
+    //   while ((UCSR0A & (1 << UDRE0)) == 0);
+    UDR0 = chData;
 }
 
 /**
  * @brief inits the Uart bus with 9600 8n1 with rx interrrupts
  */
 void uart_init(void) {
-  /// set BAUD rate to 9600 BAUD
-  UBRR0H = (uint16_t)(BAUD_PRESCALER >> 8);
-  UBRR0L = (uint16_t)BAUD_PRESCALER;
-  /// enable Tx and rx pin with an ISR on the receiver
-  UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
-  UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
-  /// enable global interrupts
-  sei();
+    /// set BAUD rate to 9600 BAUD
+    UBRR0H = (uint16_t)(BAUD_PRESCALER >> 8);
+    UBRR0L = (uint16_t)BAUD_PRESCALER;
+    /// enable Tx and rx pin with an ISR on the receiver
+    UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
+    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+    /// enable global interrupts
+    sei();
 }
 
 /**
@@ -35,28 +35,28 @@ void uart_init(void) {
  * uart_putc
  */
 void uart_puts(const uint8_t *s) {
-  while (*s) {
-    uart_putc(*s);
-    s++;
-  }
+    while (*s) {
+        uart_putc(*s);
+        s++;
+    }
 }
 /**
  * @brief gets a character by waiting for is in a busy loop
  * @deprecated
  */
 uint8_t uart_getc(void) {
-  while (!(UCSR0A & (1 << RXC0)))
-    ;
-  return UDR0;
+    while (!(UCSR0A & (1 << RXC0)))
+        ;
+    return UDR0;
 }
 
 /**
  * @brief sets the local pointer to the rxbuffer variable to receive data into
  */
 void uart_set_rxBuffer(RXBuff_t *rxb) {
-  if (rxb != NULL) {
-    rxbuffer_p = rxb;
-  }
+    if (rxb != NULL) {
+        rxbuffer_p = rxb;
+    }
 }
 
 /**
@@ -66,18 +66,17 @@ void uart_set_rxBuffer(RXBuff_t *rxb) {
  * reached and marks the buffer.linecomplete.
  */
 ISR(USART_RX_vect) {
-  if (rxbuffer_p == NULL) {
-    PORTB |= (1 << PORTB5);
-    return;
-  }
-  PORTB ^= (1 << PINB5);
-  const uint8_t c = UDR0;
+    if (rxbuffer_p == NULL) {
+        return;
+    }
+    PORTB ^= (1 << PINB5);
+    const uint8_t c = UDR0;
 
-  rxbuffer_p->buffer[rxbuffer_p->buffer_IDX] = c;
+    rxbuffer_p->buffer[rxbuffer_p->buffer_IDX] = c;
 
-  if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
-    rxbuffer_p->linecomplete = 1;
-  } else {
-    rxbuffer_p->buffer_IDX++;
-  }
+    if ((c == '\n') || (rxbuffer_p->buffer_IDX == UART_BUFFER_SIZE - 1)) {
+        rxbuffer_p->linecomplete = 1;
+    } else {
+        rxbuffer_p->buffer_IDX++;
+    }
 }

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project("RobotCar")
 set(PRODUCT_NAME "RobotCar")
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(F_CPU 16000000UL) # set clock speed to 16 MHZ
 set(MCU atmega328p) # set chip identity full list at (https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html)
