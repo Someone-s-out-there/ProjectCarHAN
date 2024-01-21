@@ -18,8 +18,8 @@ void motor_init(MotorDRV *m) {
   m->stop = stop;
   m->estop = &estop;
 
-  // Configure PB0, PB1, PB2 and PB3 as output
-  DDRB |= (1 << PORTB3) | (1 << PORTB2) | (1 << PORTB1) | (1 << PORTB0);
+  // Configure PB0, PB1, PB2, PB3, PB4 and PB5 as output
+  DDRB |= (1 << PORTB5) | (1 << PORTB4) | (1 << PORTB3) | (1 << PORTB2) | (1 << PORTB1) | (1 << PORTB0);
 
   /*
   Set PB0 and PB3 LOW
@@ -60,6 +60,9 @@ void motor_init(MotorDRV *m) {
 void setSpeed(uint16_t speed) { currentspeed = speed; }
 
 void foward(void) {
+  // Turn off the direction lights
+  PORTB &= ~((1 << PORTB5) | (1 << PORTB4));
+
   // Set PB0 and PB3 to HIGH
   PORTB |= (1 << PORTB3) | (1 << PORTB0);
 
@@ -71,6 +74,9 @@ void foward(void) {
 }
 
 void backward(void) {
+  // Turn off the direction lights
+  PORTB &= ~((1 << PORTB5) | (1 << PORTB4));
+
   // Set PB0 and PB3 LOW
   PORTB &= ~(1 << PORTB3) & ~(1 << PORTB0);
 
@@ -83,7 +89,7 @@ void backward(void) {
 
 void left(void) {
   // Set PB0 to HIGH and PB3 to LOW
-  PORTB |= (1 << PORTB0);
+  PORTB |= (1 << PORTB0) | (1<< PORTB4);
   PORTB &= ~(1 << PORTB3);
 
   OCR1A = currentspeed;
@@ -95,7 +101,7 @@ void left(void) {
 
 void right(void) {
   // Set PB0 to HIGH and PB3 to LOW
-  PORTB |= (1 << PORTB3);
+  PORTB |= (1 << PORTB3) (1<< PORTB5);
   PORTB &= ~(1 << PORTB0);
 
   OCR1A = currentspeed;
@@ -109,6 +115,9 @@ void stop(void) {
   OCR1A = 0;
   OCR1B = 0;
 
+  // Turn off the direction lights
+  PORTB &= ~((1 << PORTB5) | (1 << PORTB4));
+
   // turn off the timer1
   TCCR1B &= ~(1 << CS11) & ~(0 << CS10);
 }
@@ -116,6 +125,10 @@ void stop(void) {
 void estop(void) {
   OCR1A = 0;
   OCR1B = 0;
+
+  // Turn off the direction lights
+  PORTB &= ~((1 << PORTB5) | (1 << PORTB4));
+
   // turn off the timer1
   TCCR1B &= ~(1 << CS11) & ~(1 << CS10);
 }
