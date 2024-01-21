@@ -13,7 +13,7 @@
 #include "Voltage_monitoring.h"
 
 // Check if these libraries are present, if not add them
-#ifndef  _AVR_IO_H_
+#ifndef _AVR_IO_H_
 #include <avr/io.h>
 #endif
 
@@ -30,45 +30,59 @@
 #define MAX_VOLTAGE_VAL 500
 #define MIN_VOLTAGE_VAL 0
 
+#define MAX_OPERATING_VOLTAGE 492
+#define MIN_OPERATING_VOLTAGE 499
+
 // uint16_t variable to store the analog converted value
 volatile uint16_t ADC_Waarde = 0;
+uint8_t batteryPercentage = 0;
 /*
  * Initialize the ADC and start the voltage monitoring
  */
-void initVoltageMonitoring(void)
-{
-	// Initialize the ADC peripheral
-	// ADMUX ADC3  MUX3..0 =  0011
-	ADMUX = (1<<REFS0) | (1<<MUX1) | (1<<MUX0);
-	
-	// ADC Control and Status Register A
-	ADCSRA = 0b11111111;
-	
-	// Set ADC in freerunning mode
-	ADCSRB = 0;
+void initVoltageMonitoring(void) {
+    // Initialize the ADC peripheral
+    // ADMUX ADC3  MUX3..0 =  0011
+    ADMUX = (1 << REFS0) | (1 << MUX1) | (1 << MUX0);
+
+    // ADC Control and Status Register A
+    ADCSRA = 0b11111111;
+
+    // Set ADC in freerunning mode
+    ADCSRB = 0;
 }
 /*
  * GetVoltage() returns the acual voltage with a deviation of 0,05 volts
  */
-uint16_t getVoltage(void)
-{
-	// Map the ADC to the battery voltage
-	// standard map-values: map(ADC_Waarde, 0, 1023, 0, 500);
-	return map(ADC_Waarde, MIN_ADC_VAL, MAX_ADC_VAL, MIN_VOLTAGE_VAL, MAX_VOLTAGE_VAL);
+uint16_t getVoltage(void) {
+    // Map the ADC to the battery voltage
+    // standard map-values: map(ADC_Waarde, 0, 1023, 0, 500);
+    return map(ADC_Waarde, MIN_ADC_VAL, MAX_ADC_VAL, MIN_VOLTAGE_VAL,
+               MAX_VOLTAGE_VAL);
+}
+
+void updateBatteryPercentage(void) {
+    uint16_t voltage = getVoltage();
+    if (voltage < MIN_OPERATING_VOLTAGE)
+        batteryPercentage = 0;
+    else if (voltage < MAX_OPERATING_VOLTAGE)
+        batteryPercentage = 100;
+    else
+        batteryPercentage =
+            map(voltage, MIN_VOLTAGE_VAL, MAX_VOLTAGE_VAL, 0, 100);
 }
 
 /*
  * A map function to map the correct values to the potentiometer
- * Note: this function is from arduino: https://www.arduino.cc/reference/en/language/functions/math/map/
+ * Note: this function is from arduino:
+ * https://www.arduino.cc/reference/en/language/functions/math/map/
  */
-long map(long x, long in_min, long in_max, long out_min, long out_max)
-{
-	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-ISR(ADC_vect)
-{
-	// Save ADC value
-	ADC_Waarde = ADC;
+ISR(ADC_vect) {
+    // Save ADC value
+    ADC_Waarde = ADC;
 }
-/* ---------------------------------------------------- End of Voltage_monitoring.c ---------------------------------------------------- */
+/* ---------------------------------------------------- End of
+ * Voltage_monitoring.c ---------------------------------------------------- */

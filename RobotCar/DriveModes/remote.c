@@ -4,13 +4,17 @@
 #include <string.h>
 #include <util/atomic.h>
 
+#include "../EEPROM/userTime.h"
 #include "../Motor/motor.h"
 #include "../Uart/Uart.h"
+#include "../i2c/display.h"
+
 volatile uint8_t buffer[UART_BUFFER_SIZE];
 
 volatile RXBuff_t buffy = {
     .buffer = buffer, .buffer_IDX = 0, .linecomplete = 0};
 
+// declared in motor.c
 extern MotorDRV motor;
 
 void RemoteControl_Mode(void) {
@@ -46,8 +50,9 @@ void RemoteControl_Mode(void) {
     }
 
     // Do other things while running here
-
-    // end section
+    displayBattery();
+    updateUserTime();
+    displaySpeed(0);
 
     // clear the rx buffer
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
