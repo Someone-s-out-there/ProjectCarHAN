@@ -11,6 +11,7 @@
 #include <stdint.h>
 
 #include "../Functions/Millis/Millis.h"
+#include "../Uart/Uart.h"
 #include "../i2c/display.h"
 
 uint16_t EEPROMByteNumber;
@@ -32,6 +33,8 @@ void getUserTime(void) {
         // If the value of a byte is 255, EEPROMByteNumber is increased by one
         // and the loop starts over If the value of a byte is not 255, the loop
         // stops and the program is ready to write
+        //
+        // uint8_t fetch_use_time
         if (EEPROMByteValue == 255) {
             EEPROMByteNumber++;
         } else {
@@ -54,6 +57,7 @@ void updateUserTime(void) {
     // Updates EEPROM when time has surpassed
     if (currentMillis - previousMillisTime >= intervalTime_10S) {
         previousMillisTime = currentMillis;
+        uart_puts("time updated\n");
 
         EEPROMValue++;
 
