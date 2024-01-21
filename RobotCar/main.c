@@ -29,21 +29,6 @@ modes_t current_mode = REMOTE;
 uint8_t last_button_state = 0;
 
 #define GET_BUTTON_STATE() !(PINC & (1 << PINC0));
-union u32u8 {
-    uint32_t u32;
-    uint8_t u8[4];
-};
-void print_total_time(void) {
-    union u32u8 total;
-    for (uint16_t i = 0; i < E2END; i++) {
-        total.u32 += eeprom_read_byte((const uint8_t *)i);
-    }
-    uart_putc(0xAA);
-    uart_putc(total.u8[0]);
-    uart_putc(total.u8[1]);
-    uart_putc(total.u8[2]);
-    uart_putc(total.u8[3]);
-}
 
 int main(void) {
     IO_init();
@@ -74,10 +59,11 @@ int main(void) {
                 }
             }
         }
+
         updateUserTime();
         displayBattery();
-        // displaySpeed(0);
         displayMode(current_mode);
+
         switch (current_mode) {
             case STOPPED:
                 break;
