@@ -13,13 +13,9 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-enum Ultrasoon_sensors {
-    US_left,
-    US_center,
-    US_right
-};
+enum Ultrasoon_sensors { US_left, US_center, US_right };
 
-typedef void(US_complete_callback)(uint8_t *);
+typedef void(US_complete_callback)(uint8_t);
 
 void ultrasonic_init(US_complete_callback *callback);
 
