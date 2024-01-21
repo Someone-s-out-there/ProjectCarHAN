@@ -1,5 +1,6 @@
 #include "remote.h"
 
+#include <avr/eeprom.h>
 #include <stdint.h>
 #include <string.h>
 #include <util/atomic.h>
@@ -48,11 +49,6 @@ void RemoteControl_Mode(void) {
         default:
             break;
     }
-
-    // Do other things while running here
-    displayBattery();
-    updateUserTime();
-    displaySpeed(0);
 
     // clear the rx buffer
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
