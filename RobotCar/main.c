@@ -8,9 +8,11 @@
 #include <avr/eeprom.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <util/delay.h>
 
+#include "DriveModes/autonomous.h"
 #include "DriveModes/modes.h"
 #include "DriveModes/remote.h"
 #include "EEPROM/userTime.h"
@@ -23,6 +25,7 @@
 #include "Uart/Uart.h"
 #include "i2c/display.h"
 #include "i2c/lcd.h"
+#include "ultrasonic/Ultrasonic.h"
 
 extern MotorDRV motor;
 modes_t current_mode = REMOTE;
@@ -34,6 +37,7 @@ int main(void) {
     IO_init();
     uart_init();
     millis_init();
+    ultrasonic_init();
     motor_init(&motor);
     lcd1602_init();
     _delay_ms(1);
@@ -42,7 +46,6 @@ int main(void) {
     lcd1602_goto_xy(0, 0);
 
     updateUserTime();
-
     last_button_state = GET_BUTTON_STATE();
 
     while (1) {
@@ -60,10 +63,9 @@ int main(void) {
             }
         }
 
-        updateUserTime();
+        //        updateUserTime();
         displayBattery();
         displayMode(current_mode);
-
         switch (current_mode) {
             case STOPPED:
                 break;

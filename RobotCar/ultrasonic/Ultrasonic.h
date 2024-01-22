@@ -11,14 +11,8 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-enum Ultrasoon_sensors { US_left, US_center, US_right };
+void ultrasonic_init(void);
 
-typedef void(US_complete_callback)(uint8_t);
-
-void ultrasonic_init(US_complete_callback *callback);
-
-void ultrasonic_set_callback(US_complete_callback *callback);
-
-int8_t ultrasonic_Start_Measurement(enum Ultrasoon_sensors);
+uint8_t ultrasonic_get_distance(void);
 
 #endif /* ULTRASONIC_HEADER_FILE_H_ */
