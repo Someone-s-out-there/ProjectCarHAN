@@ -35,7 +35,7 @@
 
 // uint16_t variable to store the analog converted value
 volatile uint16_t ADC_Waarde = 0;
-uint8_t batteryPercentage = 0;
+uint32_t batteryPercentage = 0;
 /*
  * Initialize the ADC and start the voltage monitoring
  */

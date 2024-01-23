@@ -23,7 +23,7 @@ uint8_t display_speed = 0;
 uint8_t speedWillShow = 0;
 uint8_t speedUpdate = 0;
 
-extern uint8_t batteryPercentage;
+extern uint32_t batteryPercentage;
 
 void displayMode(modes_t mode) {
     display_speed = 0;
